@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Emi Tattoo — Studio de tatouage, Seine-Port</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Inter:wght@300;400;500;600&display=swap');
+
+:root{
+  --ink:#14100E;
+  --ink-soft:#221B17;
+  --paper:#F4EDE4;
+  --paper-deep:#EAE0D2;
+  --red:#8B2E2E;
+  --red-bright:#A83A3A;
+  --charcoal:#2B2521;
+  --line-dark: rgba(244,237,228,0.14);
+  --line-light: rgba(20,16,14,0.12);
+  --max:1200px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Inter', sans-serif;
+  background:var(--paper);
+  color:var(--charcoal);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Bebas Neue', sans-serif;
+  font-weight:400;
+  letter-spacing:0.02em;
+  line-height:0.95;
+}
+.mono{font-family:'Space Mono', monospace;}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+.eyebrow{
+  font-family:'Space Mono', monospace; font-size:12px; letter-spacing:0.12em; text-transform:uppercase;
+  color:var(--red); font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{content:''; width:24px; height:1.5px; background:var(--red); display:inline-block;}
+
+/* grain texture overlay */
+.grain{
+  position:fixed; inset:0; pointer-events:none; z-index:999; opacity:0.05; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(20,16,14,0.92);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line-dark);
+}
+.nav-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 32px; max-width:var(--max); margin:0 auto; position:relative;
+}
+.logo{font-family:'Bebas Neue'; font-size:26px; letter-spacing:0.03em; color:var(--paper);}
+.logo span{color:var(--red-bright);}
+nav ul{list-style:none; display:flex; gap:38px; align-items:center;}
+nav a{
+  font-size:13px; color:var(--paper); font-weight:500; text-transform:uppercase; letter-spacing:0.08em;
+  position:relative; padding:4px 0; opacity:0.85; transition:opacity .2s, color .2s;
+}
+nav a:hover{opacity:1; color:var(--red-bright);}
+.cta-btn{
+  background:var(--red); color:var(--paper)!important; padding:12px 26px;
+  font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em;
+  transition:background .25s; white-space:nowrap; border:1px solid var(--red);
+}
+.cta-btn:hover{background:transparent; color:var(--red-bright)!important;}
+.burger{display:none; background:none; border:none; cursor:pointer; padding:8px; z-index:200; position:relative;}
+.burger span{display:block; width:22px; height:2px; background:var(--paper); margin:5px 0; transition:.3s; transform-origin:center;}
+.burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.active span:nth-child(2){opacity:0;}
+.burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ===== HERO ===== */
+.hero{
+  background:var(--ink); color:var(--paper); padding:100px 0 90px; position:relative; overflow:hidden;
+}
+.hero-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center;}
+.hero h1{font-size:clamp(52px, 8vw, 96px); color:var(--paper); margin-bottom:22px;}
+.hero h1 span{color:var(--red-bright); font-style:normal;}
+.hero p{font-size:16px; color:rgba(244,237,228,0.72); max-width:440px; margin-bottom:34px;}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+.btn-outline{
+  border:1.5px solid var(--paper); color:var(--paper); padding:12px 26px;
+  font-size:13px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; transition:.25s;
+}
+.btn-outline:hover{background:var(--paper); color:var(--ink);}
+.hero-stats{display:flex; gap:40px;}
+.stat b{font-family:'Bebas Neue'; font-size:34px; color:var(--paper); display:block;}
+.stat span{font-family:'Space Mono'; font-size:11px; color:var(--red-bright); text-transform:uppercase; letter-spacing:0.06em;}
+
+.hero-visual{position:relative; aspect-ratio:3/4;}
+.flash-frame{
+  width:100%; height:100%; border:1.5px solid rgba(244,237,228,0.25); border-radius:4px;
+  display:flex; align-items:center; justify-content:center; position:relative;
+  background:linear-gradient(160deg, rgba(139,46,46,0.12), transparent 60%);
+}
+.flash-frame svg{width:62%; height:62%;}
+.flash-tag{
+  position:absolute; top:16px; left:16px; font-family:'Space Mono'; font-size:11px; color:var(--red-bright);
+  border:1px solid rgba(168,58,58,0.5); padding:4px 10px; letter-spacing:0.05em;
+}
+
+/* thread divider */
+.divider{height:1px; background:var(--line-light); width:100%;}
+
+/* ===== SECTIONS ===== */
+section{padding:96px 0;}
+.section-head{display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:56px; gap:24px; flex-wrap:wrap;}
+.section-head h2{font-size:clamp(34px,4.2vw,52px); color:var(--ink);}
+.section-head p{color:var(--charcoal); opacity:0.7; font-size:15px; max-width:360px;}
+.section-dark{background:var(--ink); color:var(--paper);}
+.section-dark h2{color:var(--paper);}
+
+/* Portfolio gallery */
+.gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line-light);}
+.piece{
+  background:var(--paper); aspect-ratio:1; position:relative; overflow:hidden; cursor:pointer;
+  display:flex; align-items:center; justify-content:center; transition:.3s;
+}
+.piece:nth-child(3n+2){background:var(--paper-deep);}
+.piece svg{width:52%; height:52%; opacity:0.85; transition:.35s;}
+.piece:hover{background:var(--ink);}
+.piece:hover svg{opacity:1; transform:scale(1.08);}
+.piece:hover svg *{stroke:var(--paper)!important;}
+.piece-tag{
+  position:absolute; bottom:10px; left:10px; font-family:'Space Mono'; font-size:10px;
+  color:var(--red); opacity:0.7;
+}
+
+/* Styles cards */
+.styles-row{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line-dark);}
+.style-card{background:var(--ink); padding:36px 26px;}
+.style-num{font-family:'Space Mono'; color:var(--red-bright); font-size:12px; display:block; margin-bottom:20px;}
+.style-card h3{font-size:26px; color:var(--paper); margin-bottom:10px;}
+.style-card p{font-size:13px; color:rgba(244,237,228,0.6);}
+
+/* Studio / trust block */
+.trust-block{display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;}
+.trust-block .eyebrow{color:var(--red);}
+.trust-block h2{font-size:clamp(30px,3.6vw,44px); margin-bottom:20px; color:var(--ink);}
+.trust-block p{font-size:15px; opacity:0.8; margin-bottom:16px; max-width:480px;}
+.trust-visual{
+  aspect-ratio:1; border:1.5px solid var(--line-light); display:flex; align-items:center; justify-content:center;
+  background:var(--paper-deep);
+}
+.trust-visual svg{width:56%;}
+.mini-stats{display:flex; gap:32px; margin-top:28px;}
+
+/* Booking */
+.booking-panel{background:var(--ink); color:var(--paper); padding:56px;}
+.booking-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;}
+.field{margin-bottom:22px;}
+.field label{font-family:'Space Mono'; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--red-bright); font-weight:700; display:block; margin-bottom:10px;}
+.field select, .field input{
+  width:100%; padding:14px 16px; border:1.5px solid var(--line-dark);
+  background:var(--ink-soft); font-family:'Inter'; font-size:14px; color:var(--paper);
+}
+.slots{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;}
+.slot{
+  border:1.5px solid var(--line-dark); padding:10px; text-align:center; font-size:13px; font-family:'Space Mono';
+  cursor:pointer; transition:.2s; background:var(--ink-soft); color:var(--paper);
+}
+.slot.selected, .slot:hover{border-color:var(--red-bright); background:var(--red); color:var(--paper); font-weight:700;}
+.confirm-btn{
+  width:100%; margin-top:8px; padding:16px; border:1.5px solid var(--red); border-radius:0;
+  background:var(--red); color:var(--paper); font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; cursor:pointer;
+  transition:.25s;
+}
+.confirm-btn:hover{background:transparent; color:var(--red-bright);}
+.deposit-note{
+  font-family:'Space Mono'; font-size:12px; color:rgba(244,237,228,0.55); margin-top:18px; line-height:1.7;
+  border-left:2px solid var(--red); padding-left:14px;
+}
+.confirmation{display:none; text-align:center; padding:30px 10px;}
+.confirmation.show{display:block;}
+.check{
+  width:54px; height:54px; margin:0 auto 20px; border:1.5px solid var(--red-bright);
+  display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--red-bright);
+}
+
+/* Footer */
+footer{background:var(--ink); color:var(--paper); padding:60px 0 30px; border-top:1px solid var(--line-dark);}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; margin-bottom:44px;}
+footer h4{font-family:'Space Mono'; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:18px; color:var(--red-bright);}
+footer p, footer a{color:rgba(244,237,228,0.65); font-size:14px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:10px;}
+.foot-bottom{
+  border-top:1px solid var(--line-dark); padding-top:22px; display:flex; justify-content:space-between;
+  font-family:'Space Mono'; font-size:11px; color:rgba(244,237,228,0.4); flex-wrap:wrap; gap:12px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .gallery{grid-template-columns:repeat(2,1fr);}
+  .styles-row{grid-template-columns:repeat(2,1fr);}
+  .trust-block{grid-template-columns:1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr; gap:32px;}
+}
+@media(max-width:860px){
+  .nav-row{position:relative;}
+  header nav{
+    position:absolute; top:calc(100% + 1px); left:0; right:0;
+    max-height:0; overflow:hidden;
+    background:var(--ink);
+    border-bottom:1px solid var(--line-dark);
+    transition:max-height .35s ease;
+  }
+  header nav.open{max-height:400px;}
+  nav ul{display:flex; flex-direction:column; align-items:stretch; gap:0; padding:8px 24px 24px;}
+  nav ul li{width:100%;}
+  nav ul a{display:block; padding:16px 2px; border-bottom:1px solid var(--line-dark);}
+  nav ul li:last-child{margin-top:12px;}
+  nav ul li:last-child a{border-bottom:none;}
+  .cta-btn{display:block; text-align:center;}
+  .burger{display:block;}
+  .wrap{padding:0 20px;}
+  .section-head{flex-direction:column; align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header>
+  <div class="nav-row">
+    <div class="logo">EMI <span>TATTOO</span></div>
+    <nav><ul>
+      <li><a href="#portfolio">Portfolio</a></li>
+      <li><a href="#styles">Styles</a></li>
+      <li><a href="#studio">Le studio</a></li>
+      <li><a href="#rdv" class="cta-btn">Prendre RDV</a></li>
+    </ul></nav>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Seine-Port · Sur rendez-vous uniquement</span>
+      <h1>L'encre est<br>définitive.<br><span>Le choix</span><br>ne l'est pas.</h1>
+      <p>Studio de tatouage à Seine-Port — fine line, réalisme, traditionnel et blackwork. Chaque projet commence par une vraie discussion, pas un copier-coller.</p>
+      <div class="hero-ctas">
+        <a href="#rdv" class="cta-btn">Réserver une consultation</a>
+        <a href="#portfolio" class="btn-outline">Voir le book</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>+10</b><span>ans d'expérience</span></div>
+        <div class="stat"><b>~6K</b><span>abonnés Facebook</span></div>
+        <div class="stat"><b>100%</b><span>sur mesure</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="flash-frame">
+        <span class="flash-tag mono">N° 014</span>
+        <svg viewBox="0 0 200 200" fill="none" stroke="#8B2E2E" stroke-width="1.8">
+          <path d="M100 30 C 70 40, 55 70, 65 100 C 75 130, 60 150, 70 175" stroke-linecap="round"/>
+          <path d="M100 30 C 130 40, 145 70, 135 100 C 125 130, 140 150, 130 175" stroke-linecap="round"/>
+          <circle cx="100" cy="60" r="14"/>
+          <path d="M85 95 Q100 105 115 95" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portfolio">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Portfolio</span>
+        <h2>Le book, pièce par pièce</h2>
+      </div>
+      <p>Emplacements réservés — à remplacer par de vraies photos de réalisations, classées par style avec filtre interactif.</p>
+    </div>
+  </div>
+  <div class="gallery">
+    <div class="piece"><span class="piece-tag mono">01 / rose</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M50 20 C35 25 30 40 40 48 C30 52 30 65 42 68 C35 75 40 85 50 82 C60 85 65 75 58 68 C70 65 70 52 60 48 C70 40 65 25 50 20Z"/><path d="M50 82 L50 95" stroke-linecap="round"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">02 / serpent</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M20 30 Q40 20 40 40 Q40 60 60 55 Q80 50 75 70 Q70 85 55 80" stroke-linecap="round"/><circle cx="20" cy="30" r="3" fill="#2B2521"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">03 / dague</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M50 10 L50 70" stroke-linecap="round"/><path d="M35 30 L65 30" stroke-linecap="round"/><path d="M42 70 L58 70 L50 90 Z"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">04 / œil</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M15 50 Q50 25 85 50 Q50 75 15 50Z"/><circle cx="50" cy="50" r="12"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">05 / hirondelle</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M50 40 C30 30 10 40 10 55 C25 50 40 55 50 65 C60 55 75 50 90 55 C90 40 70 30 50 40Z"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">06 / ancre</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M50 15 L50 75" stroke-linecap="round"/><circle cx="50" cy="15" r="7"/><path d="M25 40 L75 40" stroke-linecap="round"/><path d="M25 75 Q50 95 75 75" stroke-linecap="round"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">07 / navire</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M20 65 L80 65 L70 80 L30 80 Z"/><path d="M50 65 L50 20" stroke-linecap="round"/><path d="M50 25 L75 40 L50 45Z"/></svg>
+    </div>
+    <div class="piece"><span class="piece-tag mono">08 / lune</span>
+      <svg viewBox="0 0 100 100" fill="none" stroke="#2B2521" stroke-width="1.5"><path d="M60 20 A35 35 0 1 0 60 80 A28 28 0 1 1 60 20Z"/></svg>
+    </div>
+  </div>
+</section>
+
+<section id="styles" class="section-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Spécialités</span>
+        <h2>Un style pour chaque projet</h2>
+      </div>
+    </div>
+  </div>
+  <div class="styles-row">
+    <div class="style-card"><span class="style-num mono">I.</span><h3>Fine Line</h3><p>Traits fins et précis, pour des pièces délicates et minimalistes.</p></div>
+    <div class="style-card"><span class="style-num mono">II.</span><h3>Réalisme</h3><p>Portraits, animaux, textures — un rendu proche de la photographie.</p></div>
+    <div class="style-card"><span class="style-num mono">III.</span><h3>Traditionnel</h3><p>Aplats francs, contours marqués, l'esprit flash old school.</p></div>
+    <div class="style-card"><span class="style-num mono">IV.</span><h3>Blackwork</h3><p>Noir profond, motifs graphiques et géométrie assumée.</p></div>
+  </div>
+</section>
+
+<section id="studio">
+  <div class="wrap">
+    <div class="trust-block">
+      <div>
+        <span class="eyebrow">Le studio</span>
+        <h2>Un rendez-vous, pas un passage éclair.</h2>
+        <p>Chaque projet démarre par un échange — dessin personnalisé, choix de l'emplacement, discussion sur la cicatrisation. Rien n'est calqué, rien n'est fait à la va-vite.</p>
+        <p>Le studio reçoit uniquement sur rendez-vous, dans un cadre calme et hygiène irréprochable.</p>
+        <div class="mini-stats">
+          <div class="stat"><b style="color:var(--ink)">100%</b><span style="color:var(--red)">RDV uniquement</span></div>
+          <div class="stat"><b style="color:var(--ink)">1-1</b><span style="color:var(--red)">échange dédié</span></div>
+        </div>
+      </div>
+      <div class="trust-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#8B2E2E" stroke-width="1.5">
+          <circle cx="50" cy="35" r="16"/>
+          <path d="M20 90 Q20 60 50 60 Q80 60 80 90" />
+          <path d="M35 35 L65 35" stroke-dasharray="2 3"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rdv" class="section-dark">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="eyebrow">Réservation</span>
+        <h2>Prendre rendez-vous</h2>
+      </div>
+      <p>Démonstration du parcours de réservation — se connecterait à l'agenda réel du studio.</p>
+    </div>
+
+    <div class="booking-panel">
+      <div id="bookingForm" class="booking-grid">
+        <div>
+          <div class="field">
+            <label>Type de projet</label>
+            <select>
+              <option>Consultation / devis</option>
+              <option>Petit tatouage (fine line)</option>
+              <option>Projet réalisme</option>
+              <option>Retouche / reprise</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Emplacement souhaité</label>
+            <input type="text" placeholder="Ex : avant-bras, cheville...">
+          </div>
+          <div class="field">
+            <label>Votre nom</label>
+            <input type="text" placeholder="Prénom Nom">
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label>Date</label>
+            <input type="text" value="Samedi 8 août" readonly>
+          </div>
+          <div class="field">
+            <label>Créneau disponible</label>
+            <div class="slots">
+              <div class="slot" onclick="selectSlot(this)">11:00</div>
+              <div class="slot selected" onclick="selectSlot(this)">14:00</div>
+              <div class="slot" onclick="selectSlot(this)">16:30</div>
+            </div>
+          </div>
+          <button class="confirm-btn" onclick="showConfirm()">Confirmer la demande</button>
+          <p class="deposit-note">Un acompte de réservation (non remboursable) serait demandé en ligne à la confirmation — pratique standard qui limite aussi les rendez-vous manqués.</p>
+        </div>
+      </div>
+      <div id="confirmation" class="confirmation">
+        <div class="check">✓</div>
+        <h3 style="color:var(--paper); margin-bottom:10px; font-size:24px;">Demande envoyée</h3>
+        <p style="color:rgba(244,237,228,0.7); font-family:'Inter'; font-size:14px;">Un e-mail de confirmation et un rappel automatique 24h avant seraient envoyés dès validation par le studio.</p>
+        <a href="#" class="btn-outline" style="display:inline-block; margin-top:20px;" onclick="resetForm(); return false;">Nouvelle simulation</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">EMI <span>TATTOO</span></div>
+        <p style="margin-top:14px; max-width:280px;">Studio de tatouage — 23 rue de Melun, 77240 Seine-Port. Uniquement sur rendez-vous.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#styles">Styles</a></li>
+          <li><a href="#studio">Le studio</a></li>
+          <li><a href="#rdv">Rendez-vous</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Sur rendez-vous uniquement</li>
+          <li>Seine-Port, 77240</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Emi Tattoo — Maquette de refonte, non publiée</span>
+      <span>Proposition réalisée à titre d'exemple</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burgerBtn = document.getElementById('burgerBtn');
+const navEl = document.querySelector('header nav');
+
+burgerBtn.addEventListener('click', () => {
+  const isOpen = navEl.classList.toggle('open');
+  burgerBtn.classList.toggle('active', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen);
+});
+
+navEl.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navEl.classList.remove('open');
+    burgerBtn.classList.remove('active');
+    burgerBtn.setAttribute('aria-expanded', false);
+  });
+});
+
+function selectSlot(el){
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function showConfirm(){
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('confirmation').classList.add('show');
+}
+function resetForm(){
+  document.getElementById('confirmation').classList.remove('show');
+  document.getElementById('bookingForm').style.display = 'grid';
+}
+</script>
+
+</body>
+</html>
