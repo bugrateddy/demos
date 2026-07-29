@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Albane L. — Coiffure, Coloriste & Perruques</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@300;400;500;600&display=swap');
+
+:root{
+  --ivory:#FAF5F1;
+  --ivory-deep:#F3EAE3;
+  --plum:#4A2C35;
+  --plum-deep:#331F26;
+  --rose-gold:#B98B6F;
+  --blush:#EDD9D3;
+  --charcoal:#2A2025;
+  --gold:#C6A15B;
+  --line: rgba(74,44,53,0.12);
+  --max: 1180px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Work Sans', sans-serif;
+  background:var(--ivory);
+  color:var(--charcoal);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,.display{
+  font-family:'Fraunces', serif;
+  font-weight:500;
+  color:var(--plum-deep);
+  letter-spacing:-0.01em;
+}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+.eyebrow{
+  font-size:12px; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--rose-gold); font-weight:600; margin-bottom:14px; display:block;
+}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(250,245,241,0.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:18px 32px; max-width:var(--max); margin:0 auto;
+}
+.logo{
+  font-family:'Fraunces', serif; font-size:22px; font-weight:600; color:var(--plum-deep);
+}
+.logo span{color:var(--rose-gold); font-style:italic; font-weight:400;}
+nav ul{list-style:none; display:flex; gap:36px; align-items:center;}
+nav a{
+  font-size:14px; color:var(--plum); font-weight:500; position:relative; padding:4px 0;
+  transition:color .2s;
+}
+nav a:hover{color:var(--rose-gold);}
+.cta-btn{
+  background:var(--plum-deep); color:var(--ivory)!important; padding:12px 26px;
+  border-radius:100px; font-size:14px; font-weight:600; letter-spacing:0.02em;
+  transition:background .25s, transform .25s; white-space:nowrap;
+}
+.cta-btn:hover{background:var(--rose-gold); transform:translateY(-1px);}
+.burger{display:none; background:none; border:none; cursor:pointer; padding:8px; z-index:200; position:relative;}
+.burger span{display:block; width:24px; height:2px; background:var(--plum-deep); margin:5px 0; transition:.3s; transform-origin:center;}
+.burger.active span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.burger.active span:nth-child(2){opacity:0;}
+.burger.active span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* ===== HERO ===== */
+.hero{
+  padding:96px 0 60px; position:relative; overflow:hidden;
+}
+.hero-grid{
+  display:grid; grid-template-columns:1.1fr 0.9fr; gap:64px; align-items:center;
+}
+.hero h1{
+  font-size:clamp(38px, 5vw, 60px); line-height:1.05; margin-bottom:24px;
+}
+.hero h1 em{color:var(--rose-gold); font-style:italic;}
+.hero p{
+  font-size:17px; color:var(--plum); max-width:460px; margin-bottom:32px; opacity:0.85;
+}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px;}
+.btn-outline{
+  border:1.5px solid var(--plum-deep); padding:12px 26px; border-radius:100px;
+  font-size:14px; font-weight:600; transition:.25s;
+}
+.btn-outline:hover{background:var(--plum-deep); color:var(--ivory);}
+.hero-stats{display:flex; gap:36px;}
+.stat b{font-family:'Fraunces', serif; font-size:28px; color:var(--plum-deep); display:block; font-weight:500;}
+.stat span{font-size:12px; color:var(--rose-gold); text-transform:uppercase; letter-spacing:0.08em;}
+
+.hero-visual{
+  position:relative; aspect-ratio:4/5; border-radius:24px;
+  background:linear-gradient(155deg, var(--blush) 0%, var(--ivory-deep) 55%, var(--rose-gold) 130%);
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 30px 60px -20px rgba(74,44,53,0.25);
+}
+.hero-visual svg{width:78%; height:78%;}
+
+/* thread divider - signature element */
+.thread{
+  width:100%; height:64px; margin:8px 0;
+}
+
+/* ===== SECTIONS ===== */
+section{padding:88px 0;}
+.section-head{max-width:600px; margin-bottom:56px;}
+.section-head h2{font-size:clamp(28px,3.4vw,40px); margin-bottom:14px;}
+.section-head p{color:var(--plum); opacity:0.8; font-size:16px;}
+.section-alt{background:var(--ivory-deep);}
+
+/* Services */
+.services-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:2px;
+  background:var(--line); border-radius:20px; overflow:hidden;
+}
+.service-card{
+  background:var(--ivory); padding:36px 30px; transition:.3s;
+}
+.service-card:hover{background:var(--plum-deep);}
+.service-card:hover h3, .service-card:hover p, .service-card:hover .snum{color:var(--ivory)!important;}
+.snum{font-family:'Fraunces', serif; font-style:italic; color:var(--rose-gold); font-size:14px; display:block; margin-bottom:16px;}
+.service-card h3{font-size:20px; margin-bottom:10px; transition:.3s;}
+.service-card p{font-size:14px; color:var(--plum); opacity:0.75; transition:.3s;}
+
+/* Perruques - emotional block */
+.care-block{
+  display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;
+  background:var(--plum-deep); color:var(--ivory); border-radius:28px; padding:64px; 
+}
+.care-block .eyebrow{color:var(--gold);}
+.care-block h2{color:var(--ivory); font-size:clamp(26px,3vw,36px); margin-bottom:20px;}
+.care-block p{color:rgba(250,245,241,0.82); font-size:16px; margin-bottom:28px;}
+.care-visual{
+  aspect-ratio:1; border-radius:20px;
+  background:radial-gradient(circle at 30% 30%, rgba(198,161,90,0.35), transparent 60%), 
+             linear-gradient(160deg, rgba(198,161,90,0.15), rgba(250,245,241,0.05));
+  border:1px solid rgba(198,161,90,0.3);
+  display:flex; align-items:center; justify-content:center;
+}
+.care-visual svg{width:60%; opacity:0.9;}
+.pill{
+  display:inline-flex; align-items:center; gap:8px; background:rgba(198,161,90,0.15);
+  border:1px solid rgba(198,161,90,0.4); padding:8px 16px; border-radius:100px; font-size:13px; margin-bottom:24px;
+}
+.pill::before{content:'✦'; color:var(--gold);}
+
+/* Testimonials */
+.testi-row{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.testi{
+  background:var(--ivory); border:1px solid var(--line); border-radius:18px; padding:30px;
+}
+.testi p{font-size:15px; color:var(--plum); font-style:italic; margin-bottom:18px;}
+.testi-who{display:flex; align-items:center; gap:12px;}
+.avatar{
+  width:38px; height:38px; border-radius:100px; background:var(--blush);
+  display:flex; align-items:center; justify-content:center; font-family:'Fraunces',serif; color:var(--plum-deep); font-weight:600;
+}
+.testi-who b{font-size:14px; display:block;}
+.testi-who span{font-size:12px; color:var(--rose-gold);}
+
+/* Booking mock */
+.booking-panel{
+  background:var(--ivory); border:1px solid var(--line); border-radius:24px; padding:48px;
+  box-shadow:0 30px 60px -30px rgba(74,44,53,0.2);
+}
+.booking-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+.field{margin-bottom:20px;}
+.field label{font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--rose-gold); font-weight:600; display:block; margin-bottom:8px;}
+.field select, .field input{
+  width:100%; padding:14px 16px; border-radius:12px; border:1.5px solid var(--line);
+  background:var(--ivory-deep); font-family:'Work Sans'; font-size:14px; color:var(--charcoal);
+}
+.slots{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;}
+.slot{
+  border:1.5px solid var(--line); border-radius:10px; padding:10px; text-align:center; font-size:13px;
+  cursor:pointer; transition:.2s; background:var(--ivory-deep);
+}
+.slot.selected, .slot:hover{border-color:var(--rose-gold); background:var(--blush); color:var(--plum-deep); font-weight:600;}
+.confirm-btn{
+  width:100%; margin-top:8px; padding:16px; border:none; border-radius:12px;
+  background:var(--plum-deep); color:var(--ivory); font-size:15px; font-weight:600; cursor:pointer;
+  transition:.25s;
+}
+.confirm-btn:hover{background:var(--rose-gold);}
+.demo-note{
+  font-size:12px; color:var(--rose-gold); margin-top:16px; text-align:center;
+  border-top:1px dashed var(--line); padding-top:16px;
+}
+.confirmation{
+  display:none; text-align:center; padding:40px 20px;
+}
+.confirmation.show{display:block;}
+.check{
+  width:56px; height:56px; border-radius:100px; background:var(--blush); margin:0 auto 20px;
+  display:flex; align-items:center; justify-content:center; font-size:24px; color:var(--plum-deep);
+}
+
+/* Footer */
+footer{background:var(--plum-deep); color:var(--ivory); padding:64px 0 32px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; margin-bottom:48px;}
+footer h4{font-family:'Fraunces', serif; font-weight:500; font-size:16px; margin-bottom:18px; color:var(--gold);}
+footer p, footer a{color:rgba(250,245,241,0.75); font-size:14px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:10px;}
+.foot-bottom{
+  border-top:1px solid rgba(250,245,241,0.15); padding-top:24px; display:flex; justify-content:space-between;
+  font-size:12px; color:rgba(250,245,241,0.5); flex-wrap:wrap; gap:12px;
+}
+
+/* Responsive */
+@media(max-width:860px){
+  .nav-row{position:relative;}
+  header nav{
+    position:absolute; top:calc(100% + 1px); left:0; right:0;
+    max-height:0; overflow:hidden;
+    background:var(--ivory);
+    border-bottom:1px solid var(--line);
+    box-shadow:0 16px 28px -18px rgba(74,44,53,0.25);
+    transition:max-height .35s ease;
+  }
+  header nav.open{max-height:420px;}
+  nav ul{
+    display:flex; flex-direction:column; align-items:stretch; gap:0;
+    padding:8px 24px 24px;
+  }
+  nav ul li{width:100%;}
+  nav ul a{display:block; padding:14px 2px; border-bottom:1px solid var(--line); font-size:15px;}
+  nav ul li:last-child{margin-top:12px;}
+  nav ul li:last-child a{border-bottom:none;}
+  .cta-btn{display:block; text-align:center;}
+  .burger{display:block;}
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{order:-1; aspect-ratio:16/10;}
+  .services-grid{grid-template-columns:1fr;}
+  .care-block{grid-template-columns:1fr; padding:36px; text-align:left;}
+  .testi-row{grid-template-columns:1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr; gap:32px;}
+  .wrap{padding:0 20px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <div class="logo">Albane <span>L.</span></div>
+    <nav><ul>
+      <li><a href="#prestations">Prestations</a></li>
+      <li><a href="#perruques">Univers Perruques</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#rdv" class="cta-btn">Prendre rendez-vous</a></li>
+    </ul></nav>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Saint-Fargeau-Ponthierry · Depuis 22 ans</span>
+      <h1>Une coiffure,<br>c'est <em>un instant</em><br>rien qu'à vous.</h1>
+      <p>Salon mixte, colorimétrie sur-mesure et espace dédié aux perruques — cinq coiffeuses à votre écoute, dans un cadre pensé pour la douceur et le temps qu'il faut.</p>
+      <div class="hero-ctas">
+        <a href="#rdv" class="cta-btn">Réserver en ligne</a>
+        <a href="#prestations" class="btn-outline">Voir les prestations</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>22 ans</b><span>d'expertise</span></div>
+        <div class="stat"><b>5</b><span>coiffeuses diplômées</span></div>
+        <div class="stat"><b>4,9/5</b><span>168 avis clients</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <svg viewBox="0 0 200 200" fill="none">
+        <path d="M40 20 Q 20 100, 60 120 T 60 180" stroke="#4A2C35" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <path d="M80 10 Q 100 90, 70 130 T 90 190" stroke="#B98B6F" stroke-width="2.5" stroke-linecap="round" opacity="0.7"/>
+        <path d="M120 15 Q 140 95, 105 125 T 130 185" stroke="#4A2C35" stroke-width="2.5" stroke-linecap="round" opacity="0.5"/>
+        <path d="M160 25 Q 175 100, 140 130 T 155 180" stroke="#C6A15B" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+        <circle cx="100" cy="100" r="3" fill="#4A2C35"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+<svg class="thread" viewBox="0 0 1180 64" preserveAspectRatio="none">
+  <path d="M0 32 C 200 0, 400 64, 600 32 S 1000 0, 1180 32" stroke="#B98B6F" stroke-width="1.5" fill="none" opacity="0.5"/>
+</svg>
+</div>
+
+<section id="prestations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Prestations</span>
+      <h2>Ce que nous savons faire</h2>
+      <p>Chaque prestation commence par un diagnostic de votre cheveu — coupe, couleur, soin, toujours pensés ensemble.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <span class="snum">Coupe</span>
+        <h3>Coupe & mise en forme</h3>
+        <p>Femme, homme, enfant — une coupe pensée pour votre visage et votre routine.</p>
+      </div>
+      <div class="service-card">
+        <span class="snum">Couleur</span>
+        <h3>Colorimétrie experte</h3>
+        <p>Balayage, tie & dye, couleur pleine — diagnostic sur mèche avant chaque coloration.</p>
+      </div>
+      <div class="service-card">
+        <span class="snum">Soin</span>
+        <h3>Rituels capillaires</h3>
+        <p>Soins ciblés pour redonner densité, brillance et confort au cuir chevelu.</p>
+      </div>
+      <div class="service-card">
+        <span class="snum">Mariage</span>
+        <h3>Coiffure de mariée</h3>
+        <p>Essai puis réalisation le jour J — chignons, boucles, tresses et accessoires.</p>
+      </div>
+      <div class="service-card">
+        <span class="snum">Homme</span>
+        <h3>Barbe & coupe homme</h3>
+        <p>Coupe précise, dégradés, entretien de barbe dans un espace dédié.</p>
+      </div>
+      <div class="service-card">
+        <span class="snum">Enfant</span>
+        <h3>Coiffure enfant</h3>
+        <p>Un moment en douceur, pensé pour mettre les plus petits à l'aise.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="perruques" class="section-alt">
+  <div class="wrap">
+    <div class="care-block">
+      <div>
+        <span class="pill">Espace dédié & confidentiel</span>
+        <span class="eyebrow">L'univers perruques</span>
+        <h2>Retrouver son reflet, à son rythme.</h2>
+        <p>Perte de cheveux liée à un traitement, alopécie, calvitie — Albane vous reçoit sur rendez-vous, dans un espace discret, pour choisir ensemble une prothèse capillaire adaptée. Cheveux naturels ou synthétiques, ajustement sur-mesure, accompagnement dans les démarches administratives.</p>
+        <a href="#rdv" class="btn-outline" style="border-color:#F3EAE3; color:#FAF5F1;">Prendre rendez-vous en toute discrétion</a>
+      </div>
+      <div class="care-visual">
+        <svg viewBox="0 0 100 100" fill="none">
+          <circle cx="50" cy="38" r="22" stroke="#C6A15B" stroke-width="1.5"/>
+          <path d="M28 38 Q 50 10, 72 38" stroke="#C6A15B" stroke-width="1.5"/>
+          <path d="M50 60 L50 88" stroke="#C6A15B" stroke-width="1.5" stroke-dasharray="2 4"/>
+          <path d="M35 88 L65 88" stroke="#C6A15B" stroke-width="1.5"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="avis">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Avis clients</span>
+      <h2>Ce qu'on retient le plus souvent</h2>
+      <p>Illustration éditoriale à partir du ton des avis Google du salon — à remplacer par vos avis réels au lancement.</p>
+    </div>
+    <div class="testi-row">
+      <div class="testi">
+        <p>"L'accueil chaleureux, le fauteuil qui masse pendant le shampooing, et un résultat qui correspond enfin à ce que j'imaginais."</p>
+        <div class="testi-who">
+          <div class="avatar">C.</div>
+          <div><b>Cliente régulière</b><span>Coupe & couleur</span></div>
+        </div>
+      </div>
+      <div class="testi">
+        <p>"Un vrai accompagnement pour ma perruque, avec beaucoup de douceur dans un moment difficile. Je recommande sans hésiter."</p>
+        <div class="testi-who">
+          <div class="avatar">M.</div>
+          <div><b>Cliente perruques</b><span>Accompagnement capillaire</span></div>
+        </div>
+      </div>
+      <div class="testi">
+        <p>"Coiffure d'essai puis coiffure du jour J parfaitement identiques. Toute l'équipe a été à l'écoute jusqu'au dernier détail."</p>
+        <div class="testi-who">
+          <div class="avatar">S.</div>
+          <div><b>Mariée 2025</b><span>Coiffure de mariée</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rdv" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Réservation</span>
+      <h2>Prendre rendez-vous</h2>
+      <p>Démonstration du parcours de réservation — se connecterait à votre agenda réel et à vos disponibilités en direct.</p>
+    </div>
+
+    <div class="booking-panel">
+      <div id="bookingForm" class="booking-grid">
+        <div>
+          <div class="field">
+            <label>Prestation</label>
+            <select>
+              <option>Coupe & brushing — 45 min</option>
+              <option>Couleur & soin — 1h30</option>
+              <option>Coiffure de mariée (essai)</option>
+              <option>Rendez-vous perruques (confidentiel)</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Coiffeuse</label>
+            <select>
+              <option>Indifférent</option>
+              <option>Albane</option>
+              <option>Cindy</option>
+              <option>Bénédicte</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Votre nom</label>
+            <input type="text" placeholder="Prénom Nom">
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label>Date</label>
+            <input type="text" value="Jeudi 6 août" readonly>
+          </div>
+          <div class="field">
+            <label>Créneau disponible</label>
+            <div class="slots">
+              <div class="slot" onclick="selectSlot(this)">10:00</div>
+              <div class="slot selected" onclick="selectSlot(this)">14:30</div>
+              <div class="slot" onclick="selectSlot(this)">16:15</div>
+              <div class="slot" onclick="selectSlot(this)">17:00</div>
+              <div class="slot" onclick="selectSlot(this)">17:45</div>
+              <div class="slot" onclick="selectSlot(this)">18:30</div>
+            </div>
+          </div>
+          <button class="confirm-btn" onclick="showConfirm()">Confirmer le rendez-vous</button>
+        </div>
+      </div>
+      <div id="confirmation" class="confirmation">
+        <div class="check">✓</div>
+        <h3 style="margin-bottom:10px;">Rendez-vous confirmé</h3>
+        <p style="color:var(--plum); opacity:0.8;">Un e-mail et un SMS de confirmation seraient envoyés automatiquement — avec rappel 24h avant.</p>
+        <a href="#" class="btn-outline" style="display:inline-block; margin-top:20px;" onclick="resetForm(); return false;">Nouvelle simulation</a>
+      </div>
+      <p class="demo-note">Ceci est une démonstration du parcours — aucune donnée n'est envoyée.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:#FAF5F1;">Albane <span>L.</span></div>
+        <p style="margin-top:14px; max-width:280px;">Coiffeur coloriste — perruques — mariée. 1 Rue Abel Rémusat, 77310 Saint-Fargeau-Ponthierry.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#prestations">Prestations</a></li>
+          <li><a href="#perruques">Univers perruques</a></li>
+          <li><a href="#avis">Avis</a></li>
+          <li><a href="#rdv">Rendez-vous</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>01 64 09 81 41</li>
+          <li>Mardi – Vendredi : 9h–19h</li>
+          <li>Samedi : 9h–18h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Salon Albane L. — Maquette de refonte, non publiée</span>
+      <span>Proposition réalisée à titre d'exemple</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burgerBtn = document.getElementById('burgerBtn');
+const navEl = document.querySelector('header nav');
+
+burgerBtn.addEventListener('click', () => {
+  const isOpen = navEl.classList.toggle('open');
+  burgerBtn.classList.toggle('active', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen);
+});
+
+// Ferme le menu automatiquement après le choix d'un lien (meilleure UX mobile)
+navEl.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navEl.classList.remove('open');
+    burgerBtn.classList.remove('active');
+    burgerBtn.setAttribute('aria-expanded', false);
+  });
+});
+
+function selectSlot(el){
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function showConfirm(){
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('confirmation').classList.add('show');
+}
+function resetForm(){
+  document.getElementById('confirmation').classList.remove('show');
+  document.getElementById('bookingForm').style.display = 'grid';
+}
+</script>
+
+</body>
+</html>
