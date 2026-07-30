@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Côté Boudoir — Salon de coiffure, Barbizon</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap');
+
+:root{
+  --cream:#F7F2EA;
+  --cream-deep:#EFE6D6;
+  --forest:#2F3B2C;
+  --forest-soft:#4B5C43;
+  --brass:#B08D57;
+  --brass-light:#D3B888;
+  --wine:#6B2737;
+  --charcoal:#241F1A;
+  --line: rgba(47,59,44,0.14);
+  --max:1180px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Outfit', sans-serif;
+  background:var(--cream);
+  color:var(--charcoal);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Cormorant Garamond', serif;
+  font-weight:500;
+  color:var(--forest);
+  letter-spacing:0.005em;
+}
+em{font-style:italic; color:var(--wine);}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+.eyebrow{
+  font-size:11px; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--brass); font-weight:600; margin-bottom:16px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow::after{content:''; flex:1; height:1px; background:var(--line); max-width:60px;}
+
+/* ===== Signature "frame corners" element ===== */
+.framed{position:relative; padding:6px;}
+.framed::before, .framed::after,
+.framed .fc2::before, .framed .fc2::after{
+  content:''; position:absolute; width:22px; height:22px; border:1.5px solid var(--brass);
+}
+.framed::before{top:0; left:0; border-right:none; border-bottom:none;}
+.framed::after{top:0; right:0; border-left:none; border-bottom:none;}
+.framed .fc2{position:absolute; inset:6px;}
+.framed .fc2::before{bottom:0; left:0; border-right:none; border-top:none;}
+.framed .fc2::after{bottom:0; right:0; border-left:none; border-top:none;}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(247,242,234,0.9);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:20px 32px; max-width:var(--max); margin:0 auto; position:relative;
+}
+.logo{font-family:'Cormorant Garamond', serif; font-size:24px; font-style:italic; color:var(--forest); letter-spacing:0.01em;}
+.logo b{font-weight:600; font-style:normal;}
+nav ul{list-style:none; display:flex; gap:26px; align-items:center;}
+nav a{font-size:12.5px; color:var(--forest); font-weight:500; opacity:0.8; transition:.2s; text-transform:uppercase; letter-spacing:0.04em;}
+nav a:hover{opacity:1; color:var(--wine);}
+.cta-btn{
+  background:var(--forest); color:var(--cream)!important; padding:12px 26px;
+  border-radius:2px; font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase;
+  transition:.25s; white-space:nowrap; border:1px solid var(--forest);
+}
+.cta-btn:hover{background:var(--wine); border-color:var(--wine);}
+.burger{display:none; background:none; border:none; cursor:pointer; padding:8px; z-index:200; position:relative;}
+.burger span{display:block; width:22px; height:1.5px; background:var(--forest); margin:5px 0; transition:.3s; transform-origin:center;}
+.burger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.burger.active span:nth-child(2){opacity:0;}
+.burger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ===== HERO ===== */
+.hero{padding:90px 0 80px;}
+.hero-grid{display:grid; grid-template-columns:1.05fr 0.95fr; gap:60px; align-items:center;}
+.hero h1{font-size:clamp(40px,5.2vw,62px); line-height:1.08; margin-bottom:24px;}
+.hero p{font-size:17px; color:var(--forest-soft); max-width:440px; margin-bottom:34px;}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:44px;}
+.btn-outline{
+  border:1.5px solid var(--forest); color:var(--forest); padding:11px 24px; border-radius:2px;
+  font-size:12px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; transition:.25s;
+}
+.btn-outline:hover{background:var(--forest); color:var(--cream);}
+.hero-stats{display:flex; gap:36px;}
+.stat b{font-family:'Cormorant Garamond'; font-size:30px; color:var(--forest); display:block; font-weight:600;}
+.stat span{font-size:11px; color:var(--brass); text-transform:uppercase; letter-spacing:0.07em;}
+
+.hero-visual{position:relative; aspect-ratio:4/5;}
+.hero-visual .inner{
+  width:100%; height:100%; border-radius:2px; overflow:hidden;
+  background:linear-gradient(150deg, var(--forest) 0%, var(--forest-soft) 70%);
+  display:flex; align-items:center; justify-content:center; position:relative;
+}
+.hero-visual svg{width:56%; height:56%;}
+
+/* ===== SECTIONS ===== */
+section{padding:92px 0;}
+.section-head{max-width:600px; margin-bottom:52px;}
+.section-head h2{font-size:clamp(30px,3.6vw,42px); margin-bottom:14px;}
+.section-head p{color:var(--forest-soft); font-size:16px;}
+.section-alt{background:var(--cream-deep);}
+
+/* Story / village block */
+.story-block{display:grid; grid-template-columns:0.85fr 1.15fr; gap:64px; align-items:center;}
+.story-visual{aspect-ratio:1; background:var(--forest); position:relative;}
+.story-visual svg{width:60%; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+.story-text h2{font-size:clamp(28px,3.4vw,38px); margin-bottom:20px;}
+.story-text p{color:var(--forest-soft); font-size:16px; margin-bottom:16px; max-width:480px;}
+.story-text .signature{
+  font-family:'Cormorant Garamond'; font-style:italic; font-size:20px; color:var(--wine); margin-top:20px;
+}
+
+/* Services */
+.services-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line);}
+.service-card{background:var(--cream); padding:38px 30px; transition:.3s;}
+.service-card:hover{background:var(--forest);}
+.service-card:hover h3, .service-card:hover p, .service-card:hover .snum{color:var(--cream)!important;}
+.snum{font-family:'Cormorant Garamond'; font-style:italic; color:var(--brass); font-size:15px; display:block; margin-bottom:16px; transition:.3s;}
+.service-card h3{font-size:22px; margin-bottom:10px; transition:.3s;}
+.service-card p{font-size:14px; color:var(--forest-soft); transition:.3s;}
+
+/* Team */
+.team-row{display:grid; grid-template-columns:repeat(3,1fr); gap:32px;}
+.team-card{text-align:center;}
+.team-photo{
+  aspect-ratio:3/4; background:var(--cream-deep); margin-bottom:18px; position:relative;
+  display:flex; align-items:center; justify-content:center; border:1px solid var(--line);
+}
+.team-photo svg{width:38%; opacity:0.5;}
+.team-card h3{font-size:20px; margin-bottom:4px;}
+.team-card span{font-size:12px; color:var(--brass); text-transform:uppercase; letter-spacing:0.06em;}
+
+/* Testimonials */
+.testi-row{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.testi{background:var(--cream); border:1px solid var(--line); padding:30px;}
+.testi p{font-size:15px; color:var(--forest-soft); font-style:italic; margin-bottom:18px; font-family:'Cormorant Garamond'; font-size:18px;}
+.testi-who b{font-size:13px; display:block; text-transform:uppercase; letter-spacing:0.04em;}
+.testi-who span{font-size:12px; color:var(--brass);}
+
+/* Contact */
+.contact-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:56px; align-items:start;}
+.contact-info h2{font-size:clamp(28px,3.4vw,38px); margin-bottom:20px;}
+.contact-line{display:flex; gap:14px; padding:14px 0; border-bottom:1px solid var(--line);}
+.contact-line b{display:block; font-size:12px; text-transform:uppercase; letter-spacing:0.06em; color:var(--brass); margin-bottom:4px;}
+.contact-line span{font-size:15px; color:var(--forest);}
+.map-frame{aspect-ratio:4/3; border:1px solid var(--line); overflow:hidden;}
+.map-frame iframe{width:100%; height:100%; border:0; filter:grayscale(0.3) contrast(1.05);}
+
+/* Gallery */
+.gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+.gallery-grid .g-tall{grid-row:span 2;}
+.g-item{
+  background:var(--cream-deep); border:1px solid var(--line); aspect-ratio:1; position:relative;
+  display:flex; align-items:center; justify-content:center; overflow:hidden;
+}
+.g-item.g-tall{aspect-ratio:1/2.06;}
+.g-item svg{width:34%; opacity:0.4;}
+.g-note{
+  font-size:12px; color:var(--brass); margin-top:18px; font-style:italic; font-family:'Cormorant Garamond'; font-size:16px;
+}
+
+/* Pricing */
+.price-list{max-width:720px;}
+.price-row{
+  display:flex; justify-content:space-between; align-items:baseline; padding:18px 0;
+  border-bottom:1px solid var(--line); gap:20px;
+}
+.price-row .p-name{font-size:17px; color:var(--forest);}
+.price-row .p-name span{display:block; font-size:13px; color:var(--forest-soft); opacity:0.75; margin-top:3px;}
+.price-row .p-amount{font-family:'Cormorant Garamond'; font-size:22px; color:var(--wine); white-space:nowrap; font-weight:600;}
+.price-note{margin-top:24px; font-size:13px; color:var(--forest-soft); opacity:0.8;}
+
+/* Booking */
+.booking-block{
+  background:var(--forest); color:var(--cream); padding:70px 56px; text-align:center; border-radius:2px;
+}
+.booking-block .eyebrow{color:var(--brass-light); justify-content:center;}
+.booking-block .eyebrow::after{display:none;}
+.booking-block h2{color:var(--cream); font-size:clamp(30px,3.6vw,42px); margin-bottom:18px;}
+.booking-block p{color:rgba(247,242,234,0.75); max-width:480px; margin:0 auto 32px; font-size:16px;}
+.booking-block .cta-btn{background:var(--brass); border-color:var(--brass); color:var(--forest)!important; padding:14px 34px; font-size:13px;}
+.booking-block .cta-btn:hover{background:var(--brass-light); border-color:var(--brass-light);}
+
+.booking-panel{background:var(--cream); color:var(--charcoal); padding:48px; text-align:left; border-radius:2px;}
+.booking-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+.field{margin-bottom:20px;}
+.field label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--brass); font-weight:600; display:block; margin-bottom:8px;}
+.field select, .field input{
+  width:100%; padding:13px 15px; border-radius:2px; border:1.5px solid var(--line);
+  background:var(--cream-deep); font-family:'Outfit'; font-size:14px; color:var(--charcoal);
+}
+.slots{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:8px;}
+.slot{
+  border:1.5px solid var(--line); border-radius:2px; padding:10px; text-align:center; font-size:13px;
+  cursor:pointer; transition:.2s; background:var(--cream-deep);
+}
+.slot.selected, .slot:hover{border-color:var(--brass); background:var(--brass-light); color:var(--forest); font-weight:600;}
+.confirm-btn{
+  width:100%; margin-top:8px; padding:15px; border:none; border-radius:2px;
+  background:var(--forest); color:var(--cream); font-size:14px; font-weight:600; letter-spacing:0.04em; cursor:pointer;
+  transition:.25s;
+}
+.confirm-btn:hover{background:var(--wine);}
+.demo-note{font-size:12px; color:var(--brass); margin-top:18px; text-align:center; border-top:1px dashed var(--line); padding-top:16px;}
+.confirmation{display:none; text-align:center; padding:30px 10px;}
+.confirmation.show{display:block;}
+.check{
+  width:52px; height:52px; border-radius:100px; background:var(--cream-deep); margin:0 auto 18px;
+  display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--forest); border:1.5px solid var(--brass);
+}
+
+/* Footer */
+footer{background:var(--forest); color:var(--cream); padding:56px 0 28px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; margin-bottom:44px;}
+footer h4{font-family:'Cormorant Garamond'; font-style:italic; font-weight:500; font-size:17px; margin-bottom:16px; color:var(--brass-light);}
+footer p, footer a{color:rgba(247,242,234,0.7); font-size:14px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:9px;}
+.foot-bottom{
+  border-top:1px solid rgba(247,242,234,0.15); padding-top:22px; display:flex; justify-content:space-between;
+  font-size:11px; color:rgba(247,242,234,0.45); flex-wrap:wrap; gap:12px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-visual{order:-1; aspect-ratio:16/10;}
+  .services-grid{grid-template-columns:1fr;}
+  .story-block{grid-template-columns:1fr;}
+  .team-row{grid-template-columns:1fr 1fr;}
+  .testi-row{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr; gap:32px;}
+  .booking-block{padding:36px 22px;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid .g-tall{grid-row:auto; aspect-ratio:1;}
+  .booking-grid{grid-template-columns:1fr;}
+  .price-row{flex-direction:column; align-items:flex-start; gap:4px;}
+}
+@media(max-width:860px){
+  .nav-row{position:relative;}
+  header nav{
+    position:absolute; top:calc(100% + 1px); left:0; right:0;
+    max-height:0; overflow:hidden; background:var(--cream);
+    border-bottom:1px solid var(--line); transition:max-height .35s ease;
+  }
+  header nav.open{max-height:400px;}
+  nav ul{display:flex; flex-direction:column; align-items:stretch; gap:0; padding:8px 24px 24px;}
+  nav ul li{width:100%;}
+  nav a{display:block; padding:15px 2px; border-bottom:1px solid var(--line);}
+  nav ul li:last-child{margin-top:12px;}
+  nav ul li:last-child a{border-bottom:none;}
+  .cta-btn{display:block; text-align:center;}
+  .burger{display:block;}
+  .wrap{padding:0 20px;}
+  .team-row{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <div class="logo">Côté <b>Boudoir</b></div>
+    <nav><ul>
+      <li><a href="#prestations">Prestations</a></li>
+      <li><a href="#atelier">L'atelier</a></li>
+      <li><a href="#equipe">Équipe</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#tarifs">Tarifs</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#rdv" class="cta-btn">Réserver</a></li>
+    </ul></nav>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow">Barbizon · Salon mixte</span>
+      <h1>L'unique salon<br>au cœur du village<br><em>des peintres.</em></h1>
+      <p>Un écrin feutré et intime, pensé comme une maison plus que comme un salon. Ici, chaque coiffure se compose avec la même attention qu'un tableau — à votre rythme.</p>
+      <div class="hero-ctas">
+        <a href="#rdv" class="cta-btn">Prendre rendez-vous</a>
+        <a href="#prestations" class="btn-outline">Découvrir le salon</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>4,8/5</b><span>35 avis clients</span></div>
+        <div class="stat"><b>1</b><span>salon, tout Barbizon</span></div>
+        <div class="stat"><b>Sans RDV</b><span>ou sur réservation</span></div>
+      </div>
+    </div>
+    <div class="hero-visual framed">
+      <div class="fc2"></div>
+      <div class="inner">
+        <svg viewBox="0 0 200 200" fill="none">
+          <rect x="40" y="30" width="120" height="90" stroke="#D3B888" stroke-width="1.5"/>
+          <path d="M55 100 L85 70 L105 90 L130 55 L145 100" stroke="#D3B888" stroke-width="1.5" fill="none"/>
+          <circle cx="60" cy="55" r="6" stroke="#D3B888" stroke-width="1.5"/>
+          <path d="M100 130 Q100 155 100 175" stroke="#D3B888" stroke-width="1.5" stroke-dasharray="2 4"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="prestations">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Prestations</span>
+      <h2>Un savoir-faire complet, sans jamais presser le geste</h2>
+      <p>Coupe, couleur, soin — chaque prestation démarre par une vraie discussion sur ce que vous cherchez.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card"><span class="snum">01</span><h3>Coupe & brushing</h3><p>Femme, homme, mixte — une coupe pensée pour votre visage et votre quotidien.</p></div>
+      <div class="service-card"><span class="snum">02</span><h3>Coloration & balayage</h3><p>Diagnostic avant chaque couleur, pour un résultat fidèle à ce qui a été convenu.</p></div>
+      <div class="service-card"><span class="snum">03</span><h3>Soins capillaires</h3><p>Rituels ciblés pour redonner densité et brillance à la fibre capillaire.</p></div>
+      <div class="service-card"><span class="snum">04</span><h3>Coiffure événement</h3><p>Mariage, soirée — essai puis réalisation le jour J, sans mauvaise surprise.</p></div>
+      <div class="service-card"><span class="snum">05</span><h3>Barbe & coupe homme</h3><p>Dégradés précis, entretien de barbe, dans le même esprit feutré que le reste du salon.</p></div>
+      <div class="service-card"><span class="snum">06</span><h3>Sans rendez-vous</h3><p>Pour les envies spontanées, le salon vous accueille aussi sans réservation.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="atelier" class="section-alt">
+  <div class="wrap">
+    <div class="story-block">
+      <div class="story-visual framed">
+        <div class="fc2"></div>
+        <svg viewBox="0 0 100 100" fill="none" stroke="#D3B888" stroke-width="1.2">
+          <path d="M20 80 Q30 40 50 40 Q70 40 80 80" />
+          <circle cx="50" cy="25" r="10"/>
+          <path d="M35 55 L65 55" stroke-dasharray="1.5 3"/>
+        </svg>
+      </div>
+      <div class="story-text">
+        <span class="eyebrow">L'atelier</span>
+        <h2>Un lieu qui porte encore un peu de l'esprit de Barbizon</h2>
+        <p>Bien avant d'être un village prisé des visiteurs, Barbizon a été le refuge d'une génération de peintres venus chercher ici une lumière particulière et le temps de bien faire les choses. Côté Boudoir s'inscrit dans cet héritage à sa manière : une équipe de coiffeurs qui prend le temps de composer, plutôt que d'exécuter.</p>
+        <p>Dans cette maison feutrée en plein cœur de la Grande Rue, on vient autant pour la coupe que pour la parenthèse.</p>
+        <p class="signature">— L'équipe Côté Boudoir</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="equipe">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">L'équipe</span>
+      <h2>Les mains derrière chaque coiffure</h2>
+    </div>
+    <div class="team-row">
+      <div class="team-card">
+        <div class="team-photo"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1.2"><circle cx="50" cy="38" r="18"/><path d="M20 90 Q20 60 50 60 Q80 60 80 90"/></svg></div>
+        <h3>Olivier</h3><span>Fondateur, coiffeur-coloriste</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1.2"><circle cx="50" cy="38" r="18"/><path d="M20 90 Q20 60 50 60 Q80 60 80 90"/></svg></div>
+        <h3>L'équipe coupe</h3><span>Coiffeurs diplômés</span>
+      </div>
+      <div class="team-card">
+        <div class="team-photo"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1.2"><circle cx="50" cy="38" r="18"/><path d="M20 90 Q20 60 50 60 Q80 60 80 90"/></svg></div>
+        <h3>L'équipe couleur</h3><span>Spécialistes coloration</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Galerie</span>
+      <h2>Un aperçu du salon</h2>
+      <p>Emplacements réservés en attendant vos vraies photos — le salon, l'ambiance, quelques réalisations récentes.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item g-tall"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><rect x="15" y="15" width="70" height="70"/><circle cx="50" cy="45" r="14"/><path d="M25 85 Q25 60 50 60 Q75 60 75 85"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><path d="M20 50 Q50 20 80 50 Q50 80 20 50Z"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><rect x="20" y="20" width="60" height="60" rx="4"/></svg></div>
+      <div class="g-item g-tall"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><path d="M30 20 L70 20 L70 80 L30 80 Z"/><path d="M40 35 L60 35 M40 50 L60 50 M40 65 L55 65"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><circle cx="50" cy="50" r="30"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke="#2F3B2C" stroke-width="1"><path d="M20 30 L80 30 L80 70 L20 70 Z" /><path d="M20 30 L50 55 L80 30"/></svg></div>
+    </div>
+    <p class="g-note">— à remplacer par de vraies photos du salon, des réalisations et de l'équipe au travail</p>
+  </div>
+</section>
+
+<section id="tarifs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Tarifs</span>
+      <h2>Des prix clairs, à partir de</h2>
+      <p>Indicatifs pour les prestations simples — un diagnostic en salon affine le prix selon la longueur et l'épaisseur de cheveu.</p>
+    </div>
+    <div class="price-list">
+      <div class="price-row"><div class="p-name">Coupe femme<span>Shampoing, coupe, brushing</span></div><div class="p-amount">à partir de 42 €</div></div>
+      <div class="price-row"><div class="p-name">Coupe homme<span>Shampoing, coupe, coiffage</span></div><div class="p-amount">à partir de 28 €</div></div>
+      <div class="price-row"><div class="p-name">Coloration<span>Selon longueur, diagnostic en salon</span></div><div class="p-amount">sur devis</div></div>
+      <div class="price-row"><div class="p-name">Balayage<span>Selon technique et longueur</span></div><div class="p-amount">sur devis</div></div>
+      <div class="price-row"><div class="p-name">Brushing seul<span>Shampoing et mise en forme</span></div><div class="p-amount">à partir de 25 €</div></div>
+      <div class="price-row"><div class="p-name">Coiffure événement<span>Essai + réalisation jour J</span></div><div class="p-amount">sur devis</div></div>
+    </div>
+    <p class="price-note">Tarifs à titre indicatif pour la démo — à ajuster avec la grille réelle du salon.</p>
+  </div>
+</section>
+
+<section class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Avis clients</span>
+      <h2>Ce qu'on nous dit le plus souvent</h2>
+    </div>
+    <div class="testi-row">
+      <div class="testi">
+        <p>"Un salon comme on n'en fait plus. Le style d'Olivier, l'accueil, tout est pensé avec soin."</p>
+        <div class="testi-who"><b>Cliente régulière</b><span>Coupe & couleur</span></div>
+      </div>
+      <div class="testi">
+        <p>"Un vrai cocon de détente et de professionnalisme, complété par un accueil merveilleux."</p>
+        <div class="testi-who"><b>Client Barbizon</b><span>Coupe homme</span></div>
+      </div>
+      <div class="testi">
+        <p>"Ma coiffure de mariée réalisée ici, après plusieurs essais patients jusqu'à trouver ce que je voulais."</p>
+        <div class="testi-who"><b>Mariée 2025</b><span>Coiffure événement</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <span class="eyebrow">Contact</span>
+        <h2>Venir jusqu'à nous</h2>
+        <div class="contact-line"><div><b>Adresse</b><span>77 rue Grande, 77630 Barbizon</span></div></div>
+        <div class="contact-line"><div><b>Téléphone</b><span>01 60 66 26 21</span></div></div>
+        <div class="contact-line"><div><b>Horaires</b><span>Lundi – Samedi, 9h – 18h/19h selon les jours</span></div></div>
+        <div class="contact-line"><div><b>Accès</b><span>En plein cœur de la Grande Rue, parking à proximité</span></div></div>
+      </div>
+      <div class="map-frame framed">
+        <div class="fc2"></div>
+        <iframe src="https://www.google.com/maps?q=77+Rue+Grande,+77630+Barbizon&output=embed" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rdv">
+  <div class="wrap">
+    <div class="booking-block">
+      <span class="eyebrow">Rendez-vous</span>
+      <h2>Réservez votre moment</h2>
+      <p>Démonstration du parcours de réservation — le salon dispose déjà d'un outil de réservation en ligne fonctionnel, que nous pouvons conserver ou remplacer selon vos préférences.</p>
+
+      <div class="booking-panel">
+        <div id="bookingForm" class="booking-grid">
+          <div>
+            <div class="field">
+              <label>Prestation</label>
+              <select>
+                <option>Coupe & brushing</option>
+                <option>Coloration & soin</option>
+                <option>Coupe homme</option>
+                <option>Coiffure événement</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Coiffeur(se)</label>
+              <select>
+                <option>Indifférent</option>
+                <option>Olivier</option>
+                <option>Équipe coupe</option>
+                <option>Équipe couleur</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Votre nom</label>
+              <input type="text" placeholder="Prénom Nom">
+            </div>
+          </div>
+          <div>
+            <div class="field">
+              <label>Date</label>
+              <input type="text" value="Samedi 8 août" readonly>
+            </div>
+            <div class="field">
+              <label>Créneau disponible</label>
+              <div class="slots">
+                <div class="slot" onclick="selectSlot(this)">9:30</div>
+                <div class="slot selected" onclick="selectSlot(this)">11:00</div>
+                <div class="slot" onclick="selectSlot(this)">14:00</div>
+                <div class="slot" onclick="selectSlot(this)">15:30</div>
+                <div class="slot" onclick="selectSlot(this)">17:00</div>
+                <div class="slot" onclick="selectSlot(this)">18:15</div>
+              </div>
+            </div>
+            <button class="confirm-btn" onclick="showConfirm()">Confirmer le rendez-vous</button>
+          </div>
+        </div>
+        <div id="confirmation" class="confirmation">
+          <div class="check">✓</div>
+          <h3 style="margin-bottom:10px;">Rendez-vous confirmé</h3>
+          <p style="color:var(--forest-soft);">Un e-mail et un SMS de confirmation seraient envoyés automatiquement, avec rappel avant le rendez-vous.</p>
+          <a href="#" class="btn-outline" style="display:inline-block; margin-top:20px;" onclick="resetForm(); return false;">Nouvelle simulation</a>
+        </div>
+        <p class="demo-note">Ceci est une démonstration du parcours — aucune donnée n'est envoyée.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo">Côté <b>Boudoir</b></div>
+        <p style="margin-top:14px; max-width:280px;">Salon de coiffure mixte — 77 rue Grande, 77630 Barbizon.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#prestations">Prestations</a></li>
+          <li><a href="#atelier">L'atelier</a></li>
+          <li><a href="#equipe">Équipe</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#tarifs">Tarifs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>01 60 66 26 21</li>
+          <li>Lundi – Samedi</li>
+          <li>9h – 18h/19h selon les jours</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Côté Boudoir — Maquette de refonte, non publiée</span>
+      <span>Proposition réalisée à titre d'exemple</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burgerBtn = document.getElementById('burgerBtn');
+const navEl = document.querySelector('header nav');
+
+burgerBtn.addEventListener('click', () => {
+  const isOpen = navEl.classList.toggle('open');
+  burgerBtn.classList.toggle('active', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen);
+});
+
+navEl.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navEl.classList.remove('open');
+    burgerBtn.classList.remove('active');
+    burgerBtn.setAttribute('aria-expanded', false);
+  });
+});
+
+function selectSlot(el){
+  document.querySelectorAll('.slot').forEach(s => s.classList.remove('selected'));
+  el.classList.add('selected');
+}
+function showConfirm(){
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('confirmation').classList.add('show');
+}
+function resetForm(){
+  document.getElementById('confirmation').classList.remove('show');
+  document.getElementById('bookingForm').style.display = 'grid';
+}
+</script>
+
+</body>
+</html>
