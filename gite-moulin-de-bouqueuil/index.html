@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Moulin de Bouqueuil — Gîte de charme, Val de Loire</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@300;400;500;600;700&display=swap');
+
+:root{
+  --limestone:#F6F1E7;
+  --limestone-deep:#ECE3CE;
+  --river:#33505F;
+  --river-soft:#5B7A88;
+  --terracotta:#BC6B3C;
+  --terracotta-light:#D99A6C;
+  --moss:#6E7F5C;
+  --charcoal:#26221C;
+  --line: rgba(51,80,95,0.15);
+  --max:1200px;
+}
+*{box-sizing:border-box; margin:0; padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'Manrope', sans-serif;
+  background:var(--limestone);
+  color:var(--charcoal);
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3{
+  font-family:'Spectral', serif;
+  font-weight:500;
+  color:var(--river);
+}
+em{font-style:italic; color:var(--terracotta);}
+a{color:inherit; text-decoration:none;}
+img{max-width:100%; display:block;}
+.wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+.eyebrow{
+  font-size:11px; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--terracotta); font-weight:700; margin-bottom:16px; display:flex; align-items:center; gap:10px;
+}
+.eyebrow::after{content:''; flex:1; height:1px; background:var(--line); max-width:60px;}
+
+/* Wave signature divider (river motif) */
+.wave-divider{width:100%; height:36px; opacity:0.6;}
+
+/* Mill-wheel badge */
+.mill-badge{width:64px; height:64px;}
+
+/* ===== HEADER ===== */
+header{
+  position:sticky; top:0; z-index:100;
+  background:rgba(246,241,231,0.92);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid var(--line);
+}
+.nav-row{display:flex; align-items:center; justify-content:space-between; padding:18px 32px; max-width:var(--max); margin:0 auto; position:relative;}
+.logo{font-family:'Spectral', serif; font-size:21px; color:var(--river); display:flex; align-items:center; gap:10px;}
+.logo b{font-weight:600;}
+nav ul{list-style:none; display:flex; gap:26px; align-items:center;}
+nav a{font-size:12.5px; color:var(--river); font-weight:600; opacity:0.85; text-transform:uppercase; letter-spacing:0.04em; transition:.2s;}
+nav a:hover{opacity:1; color:var(--terracotta);}
+.cta-btn{
+  background:var(--river); color:var(--limestone)!important; padding:12px 24px; border-radius:3px;
+  font-size:12px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:.25s; border:1px solid var(--river);
+}
+.cta-btn:hover{background:var(--terracotta); border-color:var(--terracotta);}
+.burger{display:none; background:none; border:none; cursor:pointer; padding:8px; z-index:200; position:relative;}
+.burger span{display:block; width:22px; height:1.5px; background:var(--river); margin:5px 0; transition:.3s; transform-origin:center;}
+.burger.active span:nth-child(1){transform:translateY(6.5px) rotate(45deg);}
+.burger.active span:nth-child(2){opacity:0;}
+.burger.active span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);}
+
+/* ===== HERO ===== */
+.hero{padding:80px 0 0;}
+.hero-grid{display:grid; grid-template-columns:1fr; gap:0;}
+.hero-text{padding:40px 0 56px; max-width:680px;}
+.hero-text h1{font-size:clamp(38px,5.4vw,58px); line-height:1.1; margin-bottom:22px;}
+.hero-text p{font-size:17px; color:var(--river-soft); max-width:520px; margin-bottom:30px;}
+.hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-bottom:38px;}
+.btn-outline{
+  border:1.5px solid var(--river); color:var(--river); padding:11px 24px; border-radius:3px;
+  font-size:12px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; transition:.25s;
+}
+.btn-outline:hover{background:var(--river); color:var(--limestone);}
+.hero-stats{display:flex; gap:34px; flex-wrap:wrap;}
+.stat b{font-family:'Spectral'; font-size:26px; color:var(--river); display:block; font-weight:600;}
+.stat span{font-size:11px; color:var(--terracotta); text-transform:uppercase; letter-spacing:0.06em;}
+
+.hero-visual{
+  aspect-ratio:21/9; background:linear-gradient(120deg, var(--river) 0%, var(--river-soft) 100%);
+  position:relative; overflow:hidden;
+}
+.hero-visual svg{position:absolute; opacity:0.9;}
+
+/* ===== SECTIONS ===== */
+section{padding:90px 0;}
+.section-head{max-width:620px; margin-bottom:52px;}
+.section-head h2{font-size:clamp(30px,3.6vw,42px); margin-bottom:14px;}
+.section-head p{color:var(--river-soft); font-size:16px;}
+.section-alt{background:var(--limestone-deep);}
+
+/* Story */
+.story-block{display:grid; grid-template-columns:0.95fr 1.05fr; gap:60px; align-items:center;}
+.story-visual{aspect-ratio:1; background:var(--river); position:relative; border-radius:3px;}
+.story-visual svg{width:56%; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);}
+.story-text p{color:var(--river-soft); font-size:16px; margin-bottom:16px; max-width:480px;}
+
+/* Gallery */
+.gallery-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+.gallery-grid .g-tall{grid-row:span 2;}
+.g-item{
+  background:var(--limestone-deep); border:1px solid var(--line); aspect-ratio:1; position:relative;
+  display:flex; align-items:center; justify-content:center; overflow:hidden; border-radius:2px;
+}
+.g-item.g-tall{aspect-ratio:1/2.06;}
+.g-item svg{width:34%; opacity:0.45; stroke:var(--river);}
+.g-note{font-size:12px; color:var(--terracotta); margin-top:18px; font-style:italic; font-family:'Spectral'; font-size:16px;}
+
+/* Amenities */
+.amenities-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:2px; background:var(--line);}
+.amenity-card{background:var(--limestone); padding:36px 28px; transition:.3s;}
+.amenity-card:hover{background:var(--river);}
+.amenity-card:hover h3, .amenity-card:hover p, .amenity-card:hover svg *{stroke:var(--limestone)!important; color:var(--limestone)!important;}
+.amenity-card svg{width:32px; height:32px; margin-bottom:16px; stroke:var(--terracotta);}
+.amenity-card h3{font-size:19px; margin-bottom:8px; transition:.3s;}
+.amenity-card p{font-size:13.5px; color:var(--river-soft); transition:.3s;}
+
+/* Surroundings */
+.around-list{display:flex; flex-direction:column; gap:0;}
+.around-row{
+  display:flex; justify-content:space-between; align-items:center; padding:20px 0;
+  border-bottom:1px solid var(--line); gap:20px;
+}
+.around-row .a-name{font-size:17px; color:var(--river);}
+.around-row .a-name span{display:block; font-size:13px; color:var(--river-soft); opacity:0.8; margin-top:3px;}
+.around-row .a-dist{font-family:'Spectral'; font-size:20px; color:var(--terracotta); white-space:nowrap; font-weight:600;}
+
+/* Testimonials */
+.testi-row{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+.testi{background:var(--limestone); border:1px solid var(--line); padding:30px; border-radius:3px;}
+.testi .stars{color:var(--terracotta); font-size:13px; margin-bottom:14px; letter-spacing:2px;}
+.testi p{font-size:16px; color:var(--river-soft); font-style:italic; margin-bottom:18px; font-family:'Spectral';}
+.testi-who b{font-size:13px; display:block; text-transform:uppercase; letter-spacing:0.04em; color:var(--river);}
+.testi-who span{font-size:12px; color:var(--terracotta);}
+
+/* Pricing */
+.price-band{
+  background:var(--river); color:var(--limestone); padding:44px 48px; border-radius:3px;
+  display:flex; justify-content:space-between; align-items:center; gap:24px; flex-wrap:wrap;
+}
+.price-band .p-left b{font-family:'Spectral'; font-size:30px; display:block; margin-bottom:6px;}
+.price-band .p-left span{font-size:13px; color:var(--terracotta-light); text-transform:uppercase; letter-spacing:0.05em;}
+.price-note{margin-top:20px; font-size:13px; color:var(--river-soft); opacity:0.85;}
+
+/* Booking */
+.booking-block{background:var(--limestone-deep); padding:70px 0;}
+.booking-panel{
+  background:var(--limestone); border:1px solid var(--line); border-radius:3px; padding:48px;
+  box-shadow:0 30px 60px -35px rgba(51,80,95,0.3);
+}
+.booking-grid{display:grid; grid-template-columns:1fr 1fr; gap:40px; align-items:start;}
+.field{margin-bottom:20px;}
+.field label{font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--terracotta); font-weight:700; display:block; margin-bottom:8px;}
+.field select, .field input{
+  width:100%; padding:13px 15px; border-radius:3px; border:1.5px solid var(--line);
+  background:var(--limestone-deep); font-family:'Manrope'; font-size:14px; color:var(--charcoal);
+}
+.confirm-btn{
+  width:100%; margin-top:8px; padding:15px; border:none; border-radius:3px;
+  background:var(--river); color:var(--limestone); font-size:14px; font-weight:700; letter-spacing:0.04em; cursor:pointer;
+  transition:.25s;
+}
+.confirm-btn:hover{background:var(--terracotta);}
+.demo-note{font-size:12px; color:var(--terracotta); margin-top:18px; text-align:center; border-top:1px dashed var(--line); padding-top:16px;}
+.confirmation{display:none; text-align:center; padding:30px 10px;}
+.confirmation.show{display:block;}
+.check{
+  width:52px; height:52px; border-radius:100px; background:var(--limestone-deep); margin:0 auto 18px;
+  display:flex; align-items:center; justify-content:center; font-size:22px; color:var(--river); border:1.5px solid var(--terracotta);
+}
+.avail-pill{display:inline-block; background:var(--limestone-deep); border:1px solid var(--line); padding:6px 12px; border-radius:100px; font-size:12px; color:var(--river); margin-top:6px;}
+
+/* Footer */
+footer{background:var(--river); color:var(--limestone); padding:56px 0 28px;}
+.foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; margin-bottom:44px;}
+footer h4{font-family:'Spectral'; font-weight:500; font-size:16px; margin-bottom:16px; color:var(--terracotta-light);}
+footer p, footer a{color:rgba(246,241,231,0.75); font-size:14px;}
+footer ul{list-style:none;}
+footer li{margin-bottom:9px;}
+.foot-bottom{
+  border-top:1px solid rgba(246,241,231,0.15); padding-top:22px; display:flex; justify-content:space-between;
+  font-size:11px; color:rgba(246,241,231,0.45); flex-wrap:wrap; gap:12px;
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .amenities-grid{grid-template-columns:1fr 1fr;}
+  .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  .gallery-grid .g-tall{grid-row:auto; aspect-ratio:1;}
+  .story-block{grid-template-columns:1fr;}
+  .testi-row{grid-template-columns:1fr;}
+  .booking-grid{grid-template-columns:1fr;}
+  .foot-grid{grid-template-columns:1fr; gap:32px;}
+  .price-band{flex-direction:column; align-items:flex-start; padding:32px;}
+}
+@media(max-width:860px){
+  .nav-row{position:relative;}
+  header nav{
+    position:absolute; top:calc(100% + 1px); left:0; right:0;
+    max-height:0; overflow:hidden; background:var(--limestone);
+    border-bottom:1px solid var(--line); transition:max-height .35s ease;
+  }
+  header nav.open{max-height:440px;}
+  nav ul{display:flex; flex-direction:column; align-items:stretch; gap:0; padding:8px 24px 24px;}
+  nav ul li{width:100%;}
+  nav a{display:block; padding:15px 2px; border-bottom:1px solid var(--line);}
+  nav ul li:last-child{margin-top:12px;}
+  nav ul li:last-child a{border-bottom:none;}
+  .cta-btn{display:block; text-align:center;}
+  .burger{display:block;}
+  .wrap{padding:0 20px;}
+  .amenities-grid{grid-template-columns:1fr;}
+  .around-row{flex-direction:column; align-items:flex-start; gap:4px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <div class="logo">
+      <svg class="mill-badge" viewBox="0 0 64 64" fill="none" stroke="#BC6B3C" stroke-width="1.4" width="26" height="26"><circle cx="32" cy="32" r="16"/><path d="M32 16 L32 8 M32 48 L32 56 M16 32 L8 32 M48 32 L56 32 M20.7 20.7 L15 15 M43.3 43.3 L49 49 M20.7 43.3 L15 49 M43.3 20.7 L49 15"/><circle cx="32" cy="32" r="4"/></svg>
+      Le Moulin de <b>Bouqueuil</b>
+    </div>
+    <nav><ul>
+      <li><a href="#gite">Le gîte</a></li>
+      <li><a href="#galerie">Galerie</a></li>
+      <li><a href="#equipements">Équipements</a></li>
+      <li><a href="#alentours">Alentours</a></li>
+      <li><a href="#avis">Avis</a></li>
+      <li><a href="#tarifs">Tarifs</a></li>
+      <li><a href="#rdv" class="cta-btn">Vérifier les disponibilités</a></li>
+    </ul></nav>
+    <button class="burger" id="burgerBtn" aria-label="Ouvrir le menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-text">
+      <span class="eyebrow">Saint-Lubin-en-Vergonnois · Val de Loire</span>
+      <h1>Un ancien moulin, <em>au bord de l'eau</em>, pour vos plus grandes réunions.</h1>
+      <p>Sur les rives de la Cisse, à quinze minutes de Blois, ce gîte de 170 m² entièrement rénové accueille jusqu'à 14 personnes — famille élargie, groupe d'amis, grande occasion à célébrer.</p>
+      <div class="hero-ctas">
+        <a href="#rdv" class="cta-btn">Vérifier les disponibilités</a>
+        <a href="#gite" class="btn-outline">Découvrir le gîte</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>14</b><span>voyageurs</span></div>
+        <div class="stat"><b>5</b><span>chambres</span></div>
+        <div class="stat"><b>29°C</b><span>piscine toute l'année</span></div>
+        <div class="stat"><b>4,9/5</b><span>+70 avis vérifiés</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <svg viewBox="0 0 1200 300" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+      <path d="M0 220 Q150 190 300 220 T600 220 T900 220 T1200 220 V300 H0 Z" fill="#2A4652" opacity="0.7"/>
+      <path d="M0 240 Q150 210 300 240 T600 240 T900 240 T1200 240 V300 H0 Z" fill="#233c46" opacity="0.8"/>
+      <g stroke="#D99A6C" stroke-width="1.2" opacity="0.55" fill="none">
+        <rect x="480" y="90" width="240" height="110"/>
+        <path d="M480 90 L600 40 L720 90"/>
+        <circle cx="580" cy="130" r="26"/>
+        <path d="M580 104 L580 156 M554 130 L606 130 M562 112 L598 148 M598 112 L562 148"/>
+        <rect x="640" y="130" width="30" height="60"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<section id="gite">
+  <div class="wrap">
+    <div class="story-block">
+      <div class="story-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#D99A6C" stroke-width="1.2">
+          <path d="M15 65 Q30 55 50 65 T85 65" stroke-dasharray="1 4"/>
+          <rect x="35" y="25" width="30" height="35" rx="1"/>
+          <path d="M35 25 L50 12 L65 25"/>
+          <circle cx="50" cy="42" r="10"/>
+          <path d="M50 32 L50 52 M40 42 L60 42"/>
+        </svg>
+      </div>
+      <div class="story-text">
+        <span class="eyebrow">Le gîte</span>
+        <h2>L'histoire d'un moulin devenu maison de vacances</h2>
+        <p>Bâti à l'emplacement d'un ancien moulin, sur un terrain clos et ombragé qui longe la Cisse, ce gîte entièrement rénové garde le charme du bâti ancien tout en offrant tout le confort attendu pour un grand groupe.</p>
+        <p>Au rez-de-chaussée, cuisine équipée, deux salons et l'espace piscine. À l'étage, quatre chambres modulables. Sous les combles, une salle de jeux de 100 m² avec billards et baby-foot — pensée pour que chaque génération trouve sa place.</p>
+        <p>La propriétaire, Charline, accompagne les séjours depuis 2012 — hôte reconnue pour la qualité de son accueil et sa disponibilité.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Galerie</span>
+      <h2>Un aperçu du moulin</h2>
+      <p>Emplacements réservés en attendant vos vraies photos — le gîte compte 26 photos sur l'annonce actuelle, largement de quoi remplir une belle galerie.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item g-tall"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><rect x="15" y="15" width="70" height="70"/><path d="M15 60 Q35 45 50 60 T85 60"/><circle cx="65" cy="30" r="8"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><rect x="20" y="30" width="60" height="45"/><path d="M20 30 L50 12 L80 30"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><circle cx="50" cy="50" r="28"/><path d="M35 50 L65 50 M50 35 L50 65"/></svg></div>
+      <div class="g-item g-tall"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><path d="M20 20 L80 20 L80 80 L20 80 Z"/><path d="M20 55 L45 35 L60 50 L80 30"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><path d="M15 65 Q30 55 50 65 T85 65" stroke-dasharray="1 4"/><rect x="35" y="30" width="30" height="30"/></svg></div>
+      <div class="g-item"><svg viewBox="0 0 100 100" fill="none" stroke-width="1"><rect x="25" y="25" width="50" height="50" rx="2"/><path d="M40 40 L60 60 M60 40 L40 60"/></svg></div>
+    </div>
+    <p class="g-note">— à remplacer par les vraies photos du gîte : moulin, piscine, chambres, salle de jeux, extérieur</p>
+  </div>
+</section>
+
+<section id="equipements">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Équipements</span>
+      <h2>Tout est déjà là pour un séjour de groupe réussi</h2>
+    </div>
+    <div class="amenities-grid">
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 18c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0M2 13c1.5 1 3 1 4.5 0s3-1 4.5 0 3 1 4.5 0 3-1 4.5 0M6 8h12v5H6z"/></svg>
+        <h3>Piscine intérieure chauffée</h3><p>7,5 x 3,5 m, à 29°C toute l'année, avec salon de détente attenant.</p>
+      </div>
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="8" cy="9" r="1" fill="currentColor"/><circle cx="16" cy="9" r="1" fill="currentColor"/></svg>
+        <h3>Salle de jeux, 100 m²</h3><p>Deux billards, un baby-foot et des jeux pour enfants, sous les combles.</p>
+      </div>
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><circle cx="6" cy="18" r="2"/><circle cx="14" cy="16" r="2"/><circle cx="18" cy="10" r="2"/></svg>
+        <h3>Pétanque & jardin clos</h3><p>Terrain de pétanque, terrasse et jardin sécurisé au bord de la rivière.</p>
+      </div>
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><rect x="3" y="4" width="18" height="14" rx="1"/><path d="M3 8h18M8 12h4"/></svg>
+        <h3>Cuisine équipée</h3><p>Espace repas pour 14 personnes, lave-vaisselle, lave-linge, sèche-linge.</p>
+      </div>
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 3 3 10h2v10h6v-6h2v6h6V10h2z"/></svg>
+        <h3>5 chambres modulables</h3><p>Lits jumelables en king size ou séparés selon la composition du groupe.</p>
+      </div>
+      <div class="amenity-card">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M2 12c4-6 16-6 20 0M5 15c3-4 11-4 14 0M9 18c1.5-1.5 4.5-1.5 6 0"/><circle cx="12" cy="20" r="1" fill="currentColor"/></svg>
+        <h3>Wifi & espace de travail</h3><p>Connexion fibre et coin bureau dédié, pratique pour les séjours prolongés.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="alentours">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Alentours</span>
+      <h2>Au cœur des châteaux de la Loire</h2>
+      <p>À moins de 45 minutes, les incontournables du Val de Loire — et quelques adresses plus discrètes que les hôtes aiment partager.</p>
+    </div>
+    <div class="around-list">
+      <div class="around-row"><div class="a-name">Château royal de Blois<span>Cinq siècles d'histoire, en plein centre-ville</span></div><div class="a-dist">15 min</div></div>
+      <div class="around-row"><div class="a-name">Château de Chambord<span>Le plus emblématique des châteaux de la Loire</span></div><div class="a-dist">30 min</div></div>
+      <div class="around-row"><div class="a-name">Château de Cheverny<span>Modèle du château de Moulinsart dans Tintin</span></div><div class="a-dist">30 min</div></div>
+      <div class="around-row"><div class="a-name">Zoo de Beauval<span>Parmi les plus beaux zoos au monde</span></div><div class="a-dist">45 min</div></div>
+      <div class="around-row"><div class="a-name">Ferme du Huaume<span>Fromages de chèvre fermiers, dans le village</span></div><div class="a-dist">Sur place</div></div>
+      <div class="around-row"><div class="a-name">Brasserie Honigmann<span>Bière artisanale dans un ancien manoir, visite sur rendez-vous</span></div><div class="a-dist">Sur place</div></div>
+      <div class="around-row"><div class="a-name">Jardin du prieuré d'Orchaise<span>2000 variétés de plantes venues du monde entier</span></div><div class="a-dist">6 km</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="avis" class="section-alt">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Avis voyageurs</span>
+      <h2>Ce que les groupes en retiennent</h2>
+      <p>Illustration éditoriale reprenant l'esprit des avis publiés sur Gîtes de France et Airbnb — à remplacer par vos avis exacts au lancement.</p>
+    </div>
+    <div class="testi-row">
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"La piscine intérieure a fait l'unanimité, même en dehors de la saison. Un vrai bijou de maison."</p>
+        <div class="testi-who"><b>Séjour en famille</b><span>4 nuits, mai</span></div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Spacieux et fonctionnel même à quatorze. Chacun trouve sa place, entre détente et jeux."</p>
+        <div class="testi-who"><b>Réunion de famille</b><span>Anniversaire, week-end prolongé</span></div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Troisième séjour ici entre amis. L'accueil de Charline et la disponibilité font toute la différence."</p>
+        <div class="testi-who"><b>Séjour entre amis</b><span>Une semaine, été</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="tarifs">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Tarifs</span>
+      <h2>Un prix qui varie selon la saison</h2>
+    </div>
+    <div class="price-band">
+      <div class="p-left">
+        <b>À partir de 2 124 € / semaine</b>
+        <span>Jusqu'à 3 267 € en haute saison (juillet-août, vacances scolaires)</span>
+      </div>
+      <a href="#rdv" class="cta-btn" style="background:var(--terracotta); border-color:var(--terracotta);">Voir les disponibilités</a>
+    </div>
+    <p class="price-note">Location tout inclus : charges, chauffage, linge de lit et de toilette, ménage de fin de séjour compris. Caution de 2 000 €. Taxe de séjour en sus.</p>
+  </div>
+</section>
+
+<section id="rdv" class="booking-block">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Disponibilités</span>
+      <h2>Vérifiez vos dates</h2>
+      <p>Démonstration du parcours de réservation — se connecterait à votre calendrier réel et à vos tarifs par période.</p>
+    </div>
+
+    <div class="booking-panel">
+      <div id="bookingForm" class="booking-grid">
+        <div>
+          <div class="field">
+            <label>Date d'arrivée</label>
+            <input type="date" id="dateArrivee" value="2026-08-15">
+          </div>
+          <div class="field">
+            <label>Date de départ</label>
+            <input type="date" id="dateDepart" value="2026-08-22">
+            <span class="avail-pill" id="availPill">Disponible sur cette période</span>
+          </div>
+        </div>
+        <div>
+          <div class="field">
+            <label>Voyageurs</label>
+            <select>
+              <option>14 voyageurs (capacité maximale)</option>
+              <option>10 voyageurs</option>
+              <option>6 voyageurs</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Animaux</label>
+            <select><option>Non</option><option>Oui</option></select>
+          </div>
+          <button class="confirm-btn" onclick="showConfirm()">Demander la réservation</button>
+        </div>
+      </div>
+      <div id="confirmation" class="confirmation">
+        <div class="check">✓</div>
+        <h3 style="margin-bottom:10px;">Demande envoyée</h3>
+        <p style="color:var(--river-soft);">Un e-mail de confirmation serait envoyé automatiquement, avec le récapitulatif du séjour et le lien de paiement.</p>
+        <a href="#" class="btn-outline" style="display:inline-block; margin-top:20px;" onclick="resetForm(); return false;">Nouvelle simulation</a>
+      </div>
+      <p class="demo-note">Ceci est une démonstration du parcours — aucune donnée n'est envoyée.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="logo" style="color:var(--limestone);">
+          <svg class="mill-badge" viewBox="0 0 64 64" fill="none" stroke="#D99A6C" stroke-width="1.4" width="24" height="24"><circle cx="32" cy="32" r="16"/><path d="M32 16 L32 8 M32 48 L32 56 M16 32 L8 32 M48 32 L56 32"/><circle cx="32" cy="32" r="4"/></svg>
+          Le Moulin de <b>Bouqueuil</b>
+        </div>
+        <p style="margin-top:14px; max-width:280px;">Gîte de charme — Saint-Lubin-en-Vergonnois, Loir-et-Cher, Val de Loire.</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#gite">Le gîte</a></li>
+          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="#equipements">Équipements</a></li>
+          <li><a href="#alentours">Alentours</a></li>
+          <li><a href="#avis">Avis</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li>Charline T. — propriétaire</li>
+          <li>Agréé Gîtes de France depuis 2012</li>
+          <li>Réponse sous l'heure</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© Le Moulin de Bouqueuil — Maquette de refonte, non publiée</span>
+      <span>Proposition réalisée à titre d'exemple</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const burgerBtn = document.getElementById('burgerBtn');
+const navEl = document.querySelector('header nav');
+
+burgerBtn.addEventListener('click', () => {
+  const isOpen = navEl.classList.toggle('open');
+  burgerBtn.classList.toggle('active', isOpen);
+  burgerBtn.setAttribute('aria-expanded', isOpen);
+});
+
+navEl.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navEl.classList.remove('open');
+    burgerBtn.classList.remove('active');
+    burgerBtn.setAttribute('aria-expanded', false);
+  });
+});
+
+function showConfirm(){
+  document.getElementById('bookingForm').style.display = 'none';
+  document.getElementById('confirmation').classList.add('show');
+}
+function resetForm(){
+  document.getElementById('confirmation').classList.remove('show');
+  document.getElementById('bookingForm').style.display = 'grid';
+}
+
+// Dates : empêche les dates passées et calcule le nombre de nuits
+const today = new Date().toISOString().split('T')[0];
+const dateArrivee = document.getElementById('dateArrivee');
+const dateDepart = document.getElementById('dateDepart');
+const availPill = document.getElementById('availPill');
+
+dateArrivee.min = today;
+dateDepart.min = today;
+
+function updateNights(){
+  const arr = new Date(dateArrivee.value);
+  const dep = new Date(dateDepart.value);
+  dateDepart.min = dateArrivee.value;
+  if(dep > arr){
+    const nights = Math.round((dep - arr) / (1000 * 60 * 60 * 24));
+    availPill.textContent = nights + ' nuit' + (nights > 1 ? 's' : '') + ' — disponible sur cette période';
+  } else {
+    availPill.textContent = 'Sélectionnez une date de départ après l\'arrivée';
+  }
+}
+dateArrivee.addEventListener('change', updateNights);
+dateDepart.addEventListener('change', updateNights);
+</script>
+
+</body>
+</html>
