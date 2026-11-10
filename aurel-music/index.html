@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Aurel Musique – Template catalogue et fiche produit</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{--ink:#14171c;--soft:#5d636c;--paper:#fff;--mist:#f3f2ee;--line:#e6e4de;--accent:#e3bb70;--accent-ink:#2a1e08;--promo:#e8452c;--ok:#1d8a55;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--ink:#eef0ef;--soft:#9aa1a8;--paper:#101316;--mist:#1a1e22;--line:#2a2f34;--accent:#ebc983;--accent-ink:#2a1e08;--promo:#ff7a62;--ok:#4cc98a}}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 15px/1.55 "Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+.strip{background:var(--ink);color:var(--paper);font-size:13px;text-align:center;padding:8px 16px}
+.strip span+span{margin-left:28px}
+header.top{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:32px;height:68px}
+.logo{font-weight:700;font-size:20px;letter-spacing:-.02em}
+.logo i{font-style:normal;color:var(--accent)}
+nav{display:flex;gap:24px;font-weight:500;flex:1}
+nav a{color:var(--soft);padding:6px 0;border-bottom:2px solid transparent}
+nav a:hover,nav a.on{color:var(--ink);border-color:var(--ink)}
+.tools{display:flex;gap:8px;align-items:center}
+.ibtn{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:none;border-radius:999px;height:40px;padding:0 16px;cursor:pointer;font-weight:500}
+.ibtn:hover{border-color:var(--ink)}
+.count{background:var(--accent);color:var(--accent-ink);border-radius:999px;min-width:20px;height:20px;font-size:12px;display:grid;place-items:center;padding:0 6px}
+.switch{display:flex;gap:4px;background:var(--mist);border-radius:999px;padding:4px;width:max-content;margin:20px auto 0}
+.switch a{padding:6px 16px;border-radius:999px;font-weight:500;font-size:13px;color:var(--soft)}
+.switch a.on{background:var(--paper);color:var(--ink);box-shadow:0 0 0 1px var(--line)}
+.crumb{font-size:13px;color:var(--soft);padding:24px 0 0}
+.crumb a:hover{color:var(--ink)}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-.03em;margin:12px 0 8px;font-weight:600}
+.lead{color:var(--soft);margin:0;max-width:52ch}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:28px 0 4px;scrollbar-width:none}
+.chip{flex:none;border:1px solid var(--line);background:none;border-radius:999px;padding:8px 16px;cursor:pointer;font-weight:500;white-space:nowrap}
+.chip small{color:var(--soft);margin-left:6px;font-weight:400}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.7}
+.filters{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:16px 0;border-bottom:1px solid var(--line);margin-bottom:28px}
+.filters select,.filters input{height:40px;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:0 12px}
+.filters input{width:92px}
+.filters .sp{flex:1}
+.res{color:var(--soft);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px 24px}
+.card{position:relative;display:flex;flex-direction:column}
+.thumb{position:relative;aspect-ratio:1;background:var(--mist);border-radius:14px;display:grid;place-items:center;color:var(--ink);overflow:hidden}
+.thumb svg{width:56%;height:56%;opacity:.85}
+.badge{position:absolute;top:12px;left:12px;background:var(--promo);color:#fff;font-size:12px;font-weight:600;padding:3px 10px;border-radius:999px}
+.quick{position:absolute;left:12px;right:12px;bottom:12px;height:40px;border:0;border-radius:10px;background:var(--ink);color:var(--paper);font-weight:600;cursor:pointer;transform:translateY(8px);opacity:0;transition:.2s}
+.card:hover .quick,.quick:focus-visible{transform:none;opacity:1}
+.brand{font-size:13px;color:var(--soft);margin-top:14px}
+.name{font-weight:600;font-size:16px;line-height:1.3;margin:2px 0 6px}
+.name a::after{content:"";position:absolute;inset:0}
+.price{font-weight:600}
+.price s{color:var(--soft);font-weight:400;margin-right:8px}
+.price .new{color:var(--promo)}
+.more{display:flex;flex-direction:column;align-items:center;gap:12px;margin:56px 0 72px}
+.bar-p{width:220px;height:3px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar-p i{display:block;height:100%;width:2.4%;background:var(--ink)}
+.btn{display:inline-flex;align-items:center;justify-content:center;height:48px;padding:0 28px;border-radius:12px;border:1px solid var(--ink);background:none;font-weight:600;cursor:pointer}
+.btn.solid{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:hover{filter:brightness(1.1)}
+/* home */
+.hero{background:#0b0d11;color:#fff;position:relative;overflow:hidden;min-height:min(88vh,780px);display:flex;flex-direction:column;justify-content:center}
+.hero .wrap{position:relative;z-index:2;padding-top:72px;padding-bottom:250px;width:100%}
+.hero h1{font-size:clamp(42px,9vw,132px);line-height:.95;letter-spacing:-.045em;margin:0 0 28px;font-weight:600;max-width:none}
+.hero h1 span{display:block;animation:up .9s cubic-bezier(.2,.7,.2,1) both}
+.hero h1 span+span{color:#7d8594;animation-delay:.12s}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.hero .lead{color:#b4bac4;font-size:18px;max-width:44ch;margin-bottom:32px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn.light{background:#fff;color:#0b0d11;border-color:#fff}
+.btn.ghost{color:#fff;border-color:#ffffff55}
+.hg{position:absolute;right:-5%;top:4%;width:min(54vw,660px);aspect-ratio:1;height:auto;color:#fff;opacity:.09;z-index:1}
+.eq{position:absolute;left:0;right:0;bottom:0;height:230px;display:flex;align-items:flex-end;gap:5px;padding:0 5px;z-index:1}
+.eq i{flex:1;height:100%;background:linear-gradient(to top,var(--accent),transparent);border-radius:4px 4px 0 0;transform-origin:bottom;animation:eq 1.7s ease-in-out infinite alternate;animation-delay:calc(var(--i)*-137ms)}
+@keyframes eq{from{transform:scaleY(.06)}to{transform:scaleY(var(--h))}}
+.sec{padding-top:96px;scroll-margin-top:90px}
+.sec .t{font-size:clamp(28px,4vw,48px);letter-spacing:-.03em;line-height:1.05;margin:0 0 36px;font-weight:600;max-width:20ch}
+.sh{display:flex;justify-content:space-between;align-items:end;gap:16px}
+.sh a{font-weight:600;border-bottom:2px solid var(--ink);white-space:nowrap;margin-bottom:38px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:210px;gap:16px}
+.tile{position:relative;overflow:hidden;background:var(--mist);border-radius:22px;padding:24px;transition:.25s}
+.tile b{font-size:20px;font-weight:600;letter-spacing:-.01em;position:relative;z-index:1}
+.tile small{display:block;color:var(--soft);font-weight:400;font-size:14px;margin-top:2px}
+.tile svg{position:absolute;right:-6%;bottom:-8%;width:62%;height:62%;opacity:.8;transition:transform .35s}
+.tile:hover{background:var(--ink);color:var(--paper)}
+.tile:hover small{color:inherit;opacity:.7}
+.tile:hover svg{transform:rotate(-6deg) scale(1.06)}
+.tile.big{grid-column:span 2;grid-row:span 2}
+.tile.big b{font-size:34px}
+.tile.big svg{width:72%;height:72%}
+.brands{display:flex;flex-wrap:wrap;gap:4px 28px;font-size:clamp(26px,4.6vw,60px);font-weight:600;letter-spacing:-.035em;line-height:1.12}
+.brands span{color:color-mix(in srgb,var(--ink) 26%,var(--paper));transition:color .2s}
+.brands span:hover{color:var(--ink)}
+.store{background:var(--accent);color:var(--accent-ink);border-radius:28px;padding:clamp(32px,6vw,72px);display:grid;grid-template-columns:1.2fr 1fr;gap:48px;align-items:center}
+.store h2{font-size:clamp(32px,5vw,60px);line-height:1;letter-spacing:-.035em;margin:0 0 20px;font-weight:600}
+.store p{margin:0 0 28px;opacity:.85;max-width:42ch;font-size:17px}
+.store .btn{background:var(--accent-ink);color:var(--accent);border-color:var(--accent-ink)}
+.store ul{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.store li{display:flex;gap:14px;align-items:center;background:color-mix(in srgb,var(--accent-ink) 14%,transparent);border-radius:16px;padding:18px;font-weight:600}
+.store svg{width:26px;height:26px;flex:none}
+@media(max-width:1000px){.bento{grid-template-columns:repeat(2,1fr)}.tile.big{grid-row:span 1}.store{grid-template-columns:1fr;gap:32px}}
+@media(max-width:700px){.hero .wrap{padding-bottom:180px}.eq{height:150px;gap:3px}.sec{padding-top:64px}.bento{grid-auto-rows:170px;gap:12px}.hero .lead{font-size:16px}.sh a{display:none}.sec .t{margin-bottom:24px}}
+@media(prefers-reduced-motion:reduce){.eq i{animation:none;transform:scaleY(var(--h))}.hero h1 span{animation:none}}
+.burger{display:none;width:40px;padding:0;justify-content:center}
+.mnav{position:absolute;left:0;right:0;top:100%;background:var(--paper);border-bottom:1px solid var(--line);padding:8px 16px 24px;display:grid;gap:0;max-height:calc(100vh - 110px);overflow-y:auto}
+.mnav>a{font-size:28px;font-weight:600;letter-spacing:-.025em;padding:14px 0;border-bottom:1px solid var(--line)}
+.mcat{display:flex;flex-wrap:wrap;gap:8px;padding:20px 0}
+.mcat a{border:1px solid var(--line);border-radius:999px;padding:8px 16px;font-weight:500;font-size:14px}
+.mnav .btn{width:100%}
+@media(max-width:700px){.burger{display:inline-flex}.tools>.ibtn:first-child{display:none}}
+@media(min-width:701px){.mnav{display:none!important}}
+/* produit */
+.pdp{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:64px;padding:24px 0 64px}
+.gal{display:grid;grid-template-columns:72px 1fr;gap:16px;align-self:start}
+.thumbs{display:flex;flex-direction:column;gap:12px}
+.th{width:72px;height:72px;border-radius:10px;background:var(--mist);border:1px solid transparent;cursor:pointer;display:grid;place-items:center;color:var(--ink);padding:0}
+.th svg{width:60%;height:60%;opacity:.8}
+.th[aria-current="true"]{border-color:var(--ink)}
+.main{aspect-ratio:1;border-radius:18px;background:var(--mist);display:grid;place-items:center;transition:background .25s}
+.main svg{width:52%;height:52%}
+.info{position:sticky;top:92px;align-self:start}
+.info .brand{margin:0}
+.info h2{font-size:clamp(28px,3.4vw,40px);line-height:1.08;letter-spacing:-.025em;margin:6px 0 16px;font-weight:600}
+.big{font-size:28px;font-weight:600}
+.tax{font-size:13px;color:var(--soft);margin-left:8px;font-weight:400}
+.stock{display:flex;align-items:center;gap:8px;margin:16px 0 24px;font-size:14px}
+.stock::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.buy{display:flex;gap:12px}
+.qty{display:flex;align-items:center;border:1px solid var(--line);border-radius:12px;height:48px}
+.qty button{width:40px;height:100%;border:0;background:none;font-size:18px;cursor:pointer}
+.qty output{min-width:24px;text-align:center;font-weight:600}
+.buy .btn{flex:1}
+.pts{list-style:none;margin:28px 0;padding:0;display:grid;gap:0;border:1px solid var(--line);border-radius:14px}
+.pts li{display:flex;gap:14px;padding:14px 18px;font-size:14px}
+.pts li+li{border-top:1px solid var(--line)}
+.pts b{display:block;font-weight:600}
+.pts span{color:var(--soft)}
+.pts svg{flex:none;width:22px;height:22px;margin-top:2px}
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;display:flex;justify-content:space-between;cursor:pointer;padding:16px 0;font-weight:600}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-weight:400;font-size:20px;line-height:1}
+details[open] summary::after{content:"−"}
+details p{margin:0 0 16px;color:var(--soft);max-width:60ch}
+dl{display:grid;grid-template-columns:140px 1fr;gap:8px 16px;margin:0 0 16px;font-size:14px}
+dt{color:var(--soft)}dd{margin:0}
+.video{aspect-ratio:16/9;border-radius:18px;background:var(--ink);color:var(--paper);display:grid;place-items:center;margin-bottom:72px}
+.video button{width:72px;height:72px;border-radius:50%;border:0;background:var(--paper);color:var(--ink);cursor:pointer;font-size:24px}
+.video div{text-align:center;display:grid;gap:12px;justify-items:center}
+h3{font-size:24px;letter-spacing:-.02em;margin:0 0 24px;font-weight:600}
+.rel{padding-bottom:80px}
+footer{background:var(--ink);padding:40px 0;font-size:14px;color:var(--paper)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.sticky{display:none}
+[hidden]{display:none!important}
+@media(max-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}.pdp{grid-template-columns:1fr;gap:32px}.info{position:static}}
+@media(max-width:700px){
+.wrap{padding:0 16px}.strip span+span{display:none}
+nav{display:none}.bar{height:60px;justify-content:space-between}
+.grid{grid-template-columns:repeat(2,1fr);gap:28px 12px}
+.quick{display:none}.name{font-size:14px}
+.gal{grid-template-columns:1fr}.thumbs{flex-direction:row;order:2}
+.sticky{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--paper);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));gap:12px;align-items:center}
+.sticky .btn{flex:1;height:44px}
+body.is-pdp footer{padding-bottom:90px}
+}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="gtr" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" transform="rotate(-40 50 50)"><ellipse cx="50" cy="70" rx="19" ry="16"/><ellipse cx="50" cy="49" rx="12" ry="11"/><circle cx="50" cy="63" r="5"/><rect x="47" y="12" width="6" height="28"/><rect x="45" y="3" width="10" height="9" rx="2"/></g></symbol>
+<symbol id="pdl" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.4"><rect x="28" y="14" width="44" height="72" rx="6"/><circle cx="40" cy="30" r="5"/><circle cx="60" cy="30" r="5"/><circle cx="50" cy="48" r="5"/><circle cx="50" cy="71" r="7"/></g></symbol>
+<symbol id="drm" viewBox="0 0 100 100"><path d="M28 22h44c0 20-9 26-9 38s7 16 11 22H26c4-6 11-10 11-22S28 42 28 22z" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/><path d="M34 34h32M36 46h28" stroke="currentColor" stroke-width="2.4" fill="none"/></symbol>
+<symbol id="amp" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.4"><rect x="16" y="26" width="68" height="50" rx="5"/><circle cx="50" cy="55" r="14"/><circle cx="50" cy="55" r="5"/><circle cx="28" cy="35" r="2.5"/><circle cx="40" cy="35" r="2.5"/><circle cx="52" cy="35" r="2.5"/></g></symbol>
+<symbol id="kbd" viewBox="0 0 100 100"><g fill="none" stroke="currentColor" stroke-width="2.4"><rect x="12" y="32" width="76" height="40" rx="4"/><path d="M25 32v40M38 32v40M50 32v40M62 32v40M75 32v40"/><path d="M22 32v22h6V32zM35 32v22h6V32zM59 32v22h6V32zM72 32v22h6V32z" fill="currentColor"/></g></symbol>
+<symbol id="truck" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 6h11v10H2zM13 9h4l4 4v3h-8"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></g></symbol>
+<symbol id="shop" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l1.5-5h15L21 9M4 9v11h16V9M3 9h18M10 20v-6h4v6"/></g></symbol>
+<symbol id="lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></g></symbol>
+</defs></svg>
+
+<div class="strip"><span>Livraison à domicile ou retrait en magasin</span><span>Paiement sécurisé par carte bancaire</span></div>
+<header class="top"><div class="wrap bar">
+<a class="logo" href="#home">Aurel<i>.</i>Musique</a>
+<nav><a href="#home" data-n="home">Accueil</a><a href="#catalogue" data-n="catalogue">Catalogue</a><a href="#marques">Nos marques</a><a href="#magasin">Le magasin</a><a href="#magasin">Contact</a></nav>
+<div class="tools"><button class="ibtn" type="button">Connexion</button><button class="ibtn" type="button" aria-label="Panier">Panier <span class="count" id="cart">0</span></button><button class="ibtn burger" type="button" id="bg" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mnav"><svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path id="bgp" d="M2 6h14M2 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/></svg></button></div>
+</div>
+<div class="mnav" id="mnav" hidden><a href="#home">Accueil</a><a href="#catalogue">Catalogue</a><a href="#marques">Nos marques</a><a href="#magasin">Le magasin</a><a href="#magasin">Contact</a>
+<div class="mcat"><a href="#catalogue">Guitares</a><a href="#catalogue">Effets</a><a href="#catalogue">Amplis</a><a href="#catalogue">Percussions</a><a href="#catalogue">Claviers</a></div>
+<button class="btn" type="button">Connexion</button></div></header>
+
+
+
+<main>
+<!-- ACCUEIL -->
+<section id="v-home" hidden>
+<div class="hero"><svg class="hg" aria-hidden="true"><use href="#gtr"/></svg>
+<div class="wrap"><h1><span>Trouvez l’instrument</span><span>qui vous fait vibrer.</span></h1>
+<p class="lead">Guitares, effets, amplis, percussions et sono. Livrés chez vous ou à retirer en boutique.</p>
+<div class="cta"><a class="btn light" href="#catalogue">Découvrir le catalogue</a><a class="btn ghost" href="#magasin">Passer en boutique</a></div></div>
+<div class="eq" id="eq" aria-hidden="true"></div></div>
+<div class="wrap">
+<div class="sec"><div class="sh"><h2 class="t">Toute la musique, par famille.</h2><a href="#catalogue">Tout le catalogue</a></div>
+<div class="bento">
+<a class="tile big" href="#catalogue"><b>Les guitares<small>147 modèles</small></b><svg><use href="#gtr"/></svg></a>
+<a class="tile" href="#catalogue"><b>Les effets<small>96 pédales</small></b><svg><use href="#pdl"/></svg></a>
+<a class="tile" href="#catalogue"><b>Les amplis<small>37 modèles</small></b><svg><use href="#amp"/></svg></a>
+<a class="tile" href="#catalogue"><b>Les percussions<small>23 modèles</small></b><svg><use href="#drm"/></svg></a>
+<a class="tile" href="#catalogue"><b>Les claviers<small>9 modèles</small></b><svg><use href="#kbd"/></svg></a>
+</div></div>
+<div class="sec"><div class="sh"><h2 class="t">Sélection du moment.</h2><a href="#catalogue">Voir tout</a></div><div class="grid" id="nw"></div></div>
+<div class="sec" id="marques"><h2 class="t">Les plus grandes marques, en rayon.</h2>
+<div class="brands"><span>Fender</span><span>Ibanez</span><span>Yamaha</span><span>Korg</span><span>Gretsch</span><span>Meinl</span><span>Marshall</span><span>Orange</span><span>Takamine</span><span>Squier</span><span>Kala</span><span>BOSS</span><span>VOX</span><span>Roland</span><span>Gibson</span><span>Marcus Miller</span><span>Audio-Technica</span><span>Zoom</span></div></div>
+<div class="sec" id="magasin"><div class="store"><div><h2>Essayez, comparez, repartez avec.</h2><p>Passez en boutique pour toucher l’instrument avant de l’acheter, ou commandez en ligne et retirez-le sur place.</p><a class="btn" href="#catalogue">Voir le catalogue</a></div>
+<ul><li><svg><use href="#shop"/></svg>Retrait en boutique</li><li><svg><use href="#truck"/></svg>Livraison à domicile</li><li><svg><use href="#lock"/></svg>Paiement sécurisé par carte</li></ul></div></div>
+<div style="height:96px"></div>
+</div></section>
+
+<!-- CATALOGUE -->
+<section id="v-catalogue" class="wrap">
+<div class="crumb"><a href="#home">Accueil</a> / Catalogue</div>
+<h1>Tout le matériel,<br>au même endroit.</h1>
+<p class="lead">373 références en stock à Aurel Musique. Livrées chez vous ou à retirer en boutique.</p>
+<div class="chips" id="chips"></div>
+<div class="filters">
+<select aria-label="Marque"><option>Toutes les marques</option><option>Acus</option><option>Alhambra</option><option>Fender</option><option>Ibanez</option><option>Meinl</option></select>
+<label class="res">Prix <input type="number" placeholder="Min" aria-label="Prix minimum"> – <input type="number" placeholder="Max" aria-label="Prix maximum"> €</label>
+<span class="sp"></span>
+<span class="res">1–9 sur 373 produits</span>
+<select aria-label="Trier"><option>Pertinence</option><option>Popularité</option><option>Nouveautés</option><option>Prix croissant</option><option>Prix décroissant</option></select>
+</div>
+<div class="grid" id="grid"></div>
+<div class="more"><div class="bar-p"><i></i></div><span class="res">9 produits affichés sur 373</span><button class="btn" type="button">Voir plus de produits</button></div>
+</section>
+
+<!-- PRODUIT -->
+<section id="v-produit" class="wrap" hidden>
+<div class="crumb"><a href="#home">Accueil</a> / <a href="#catalogue">Les guitares</a> / <a href="#catalogue">Classique</a> / Alhambra 7 Fc</div>
+<div class="pdp">
+<div class="gal">
+<div class="thumbs" id="thumbs"></div>
+<div class="main" id="main"><svg><use href="#gtr"/></svg></div>
+</div>
+<div class="info">
+<p class="brand">Alhambra</p>
+<h2>Alhambra 7 Fc + housse 25 mm</h2>
+<div><span class="big">999,00 €</span><span class="tax">TTC</span></div>
+<div class="stock">Disponible en magasin et en livraison</div>
+<div class="buy">
+<div class="qty"><button type="button" id="minus" aria-label="Moins">−</button><output id="q">1</output><button type="button" id="plus" aria-label="Plus">+</button></div>
+<button class="btn solid" type="button" id="add">Ajouter au panier</button>
+</div>
+<ul class="pts">
+<li><svg><use href="#shop"/></svg><div><b>Retrait gratuit en boutique</b><span>Essayez la guitare avant de repartir.</span></div></li>
+<li><svg><use href="#truck"/></svg><div><b>Livraison à domicile</b><span>Emballage renforcé pour les instruments.</span></div></li>
+<li><svg><use href="#lock"/></svg><div><b>Paiement sécurisé</b><span>Carte bancaire.</span></div></li>
+</ul>
+<details open><summary>Description</summary><p>Guitare flamenca blanche, fond et éclisses en cyprès massif. Équilibrée en puissance comme en rapport basses/aigus. Qualité conservatoire, sonorité constante, mélodie bien définie. Fabriquée à la main.</p></details>
+<details><summary>Caractéristiques</summary>
+<dl><dt>Table</dt><dd>Épicéa allemand massif</dd><dt>Fond et éclisses</dt><dd>Cyprès massif</dd><dt>Manche</dt><dd>Acajou africain renforcé d’ébène</dd><dt>Touche</dt><dd>Ébène</dd><dt>Mécaniques</dt><dd>Dorées</dd><dt>Talon</dt><dd>Espagnol</dd><dt>Cordes</dt><dd>D’Addario XTC44, tension extra hard</dd></dl></details>
+<details><summary>Livré avec</summary><p>Housse luxe 25 mm et pickguard transparent.</p></details>
+</div>
+</div>
+<div class="video"><div><button type="button" aria-label="Lire la vidéo">▶</button><span>Écouter la 7 Fc en vidéo</span></div></div>
+<div class="rel"><h3>Dans la même famille</h3><div class="grid" id="rel"></div></div>
+</section>
+</main>
+
+<div class="sticky" id="sticky" hidden><div><b>999,00 €</b><br><span class="res">Alhambra 7 Fc</span></div><button class="btn solid" type="button" id="add2">Ajouter au panier</button></div>
+
+<footer><div class="wrap"><span>© Aurel Musique</span><span>CGU / CGV</span><span>Confidentialité</span><span>Facebook / Instagram</span></div></footer>
+
+<script>
+(function(){
+var P=[
+{b:"A Tempo",n:"Djembé-Cajon",p:150,o:250,t:"drm",c:"Les percussions"},
+{b:"Acus",n:"Forstrings 6T Wood Stage",p:899,t:"amp",c:"Les amplis"},
+{b:"Acus",n:"One Forstrings 5T Wood Stage",p:699,t:"amp",c:"Les amplis"},
+{b:"Admira",n:"F4 EF",p:699,t:"gtr",c:"Les guitares"},
+{b:"Alhambra",n:"1C-HT + housse 10 mm",p:369,t:"gtr",c:"Les guitares"},
+{b:"Alhambra",n:"7 Fc + housse 25 mm",p:999,t:"gtr",c:"Les guitares"},
+{b:"Alhambra",n:"8P + étui",p:1549,t:"gtr",c:"Les guitares"},
+{b:"Alhambra",n:"Z Nature + housse 10 mm",p:329,t:"gtr",c:"Les guitares"},
+{b:"All Pedal",n:"Alcmène",p:179,t:"pdl",c:"Les effets"}];
+var C=[["Tout",373],["Les guitares",147],["Les effets",96],["Les amplis",37],["Sonorisation",32],["Les accessoires",24],["Les percussions",23],["Les claviers",9],["Les harmonicas",6],["Occasions",32]];
+var eur=function(v){return v.toLocaleString("fr-FR",{minimumFractionDigits:2})+" €"};
+function card(x){
+return '<article class="card"><div class="thumb">'+(x.o?'<span class="badge">−'+Math.round(100-x.p/x.o*100)+' %</span>':'')+'<svg><use href="#'+x.t+'"/></svg><button class="quick" type="button">Ajouter au panier</button></div><div class="brand">'+x.b+'</div><h3 class="name" style="font-size:16px;margin:2px 0 6px"><a href="#produit">'+x.n+'</a></h3><div class="price">'+(x.o?'<s>'+eur(x.o)+'</s><span class="new">'+eur(x.p)+'</span>':eur(x.p))+'</div></article>'}
+document.getElementById("grid").innerHTML=P.map(card).join("");
+document.getElementById("rel").innerHTML=[P[4],P[7],P[6],P[3]].map(card).join("");
+var ch=document.getElementById("chips");
+ch.innerHTML=C.map(function(c,i){return '<button class="chip" type="button" aria-pressed="'+(i==0)+'">'+c[0]+'<small>'+c[1]+'</small></button>'}).join("");
+ch.addEventListener("click",function(e){var b=e.target.closest(".chip");if(!b)return;ch.querySelectorAll(".chip").forEach(function(x){x.setAttribute("aria-pressed",x===b)})});
+var tints=["#f3f2ee","#efe9d9","#f1e8e0"],tb=document.getElementById("thumbs"),mn=document.getElementById("main");
+tb.innerHTML=tints.map(function(t,i){return '<button class="th" type="button" style="background:'+t+'" aria-label="Photo '+(i+1)+'" aria-current="'+(i==0)+'"><svg><use href="#gtr"/></svg></button>'}).join("");
+tb.addEventListener("click",function(e){var b=e.target.closest(".th");if(!b)return;var i=[].indexOf.call(tb.children,b);[].forEach.call(tb.children,function(x){x.setAttribute("aria-current",x===b)});mn.style.background=tints[i]});
+var n=1,q=document.getElementById("q"),cart=0,cc=document.getElementById("cart");
+document.getElementById("plus").onclick=function(){q.textContent=++n};
+document.getElementById("minus").onclick=function(){if(n>1)q.textContent=--n};
+function add(){cart+=n;cc.textContent=cart}
+document.getElementById("add").onclick=add;document.getElementById("add2").onclick=add;
+document.addEventListener("click",function(e){if(e.target.classList.contains("quick")){cart++;cc.textContent=cart}});
+var bars="";
+for(var i=0;i<64;i++){bars+='<i style="--i:'+i+';--h:'+(.18+.82*Math.abs(Math.sin(i*.43)*Math.cos(i*.17))).toFixed(2)+'"></i>'}
+document.getElementById("eq").innerHTML=bars;
+document.getElementById("nw").innerHTML=[P[5],P[0],P[1],P[8]].map(card).join("");
+function setM(o){var m=document.getElementById("mnav"),b=document.getElementById("bg");m.hidden=!o;b.setAttribute("aria-expanded",o);b.setAttribute("aria-label",o?"Fermer le menu":"Ouvrir le menu");document.getElementById("bgp").setAttribute("d",o?"M3 3l12 12M15 3L3 15":"M2 6h14M2 12h14")}
+document.getElementById("bg").onclick=function(){setM(document.getElementById("mnav").hidden)};
+function route(){
+setM(false);
+var h=location.hash.slice(1),v=h==="produit"?"produit":h==="catalogue"?"catalogue":"home";
+["home","catalogue","produit"].forEach(function(k){document.getElementById("v-"+k).hidden=k!==v});
+document.getElementById("sticky").hidden=v!=="produit";
+document.body.classList.toggle("is-pdp",v==="produit");
+document.querySelectorAll("nav a").forEach(function(a){a.classList.toggle("on",a.dataset.n===v)});
+var t=(h==="marques"||h==="magasin")?document.getElementById(h):null;
+t?t.scrollIntoView():window.scrollTo(0,0)}
+addEventListener("hashchange",route);route();
+})();
+</script>
+</body>
+</html>
